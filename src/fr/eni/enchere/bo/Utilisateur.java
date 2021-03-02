@@ -3,6 +3,7 @@ package fr.eni.enchere.bo;
 public class Utilisateur {
 	
 	//Attributs
+	private List<ArticleVendu> vente = new ArrayList<ArticleVendu>();
 	private int noUtilisateur;
 	private String pseudo;
 	private String nom;
@@ -13,8 +14,8 @@ public class Utilisateur {
 	private int codePostal;
 	private String ville;
 	private String motDePasse;
-	private float credit;
-	private String administrateur;
+	private int credit;
+	private boolean administrateur;
 
 	//Constucteurs
 	public Utilisateur() {
@@ -38,6 +39,13 @@ public class Utilisateur {
 	
 	
 	//Getter et Setter
+	public List<ArticleVendu> getVente() {
+		return vente;
+	}
+
+	public void setVente(List<ArticleVendu> vente) {
+		this.vente = vente;
+	}
 	
 	public int getNoUtilisateur() {
 		return noUtilisateur;
@@ -119,26 +127,28 @@ public class Utilisateur {
 		this.motDePasse = motDePasse;
 	}
 	
-	public float getCredit() {
+	public int getCredit() {
 		return credit;
 	}
 	
-	public void setCredit(float credit) {
+	public void setCredit(int credit) {
 		this.credit = credit;
 	}
 	
-	public String getAdministrateur() {
+	public boolean getAdministrateur() {
 		return administrateur;
 	}
 	
-	public void setAdministrateur(String administrateur) {
+	public void setAdministrateur(boolean administrateur) {
 		this.administrateur = administrateur;
 	}
 
 	@Override
 	public String toString() {
-		String s = String.format("Numéro d'utilisateur : %s%n Pseudo : %s%n Nom : %s%n Prénom : %s%n Email : %s%n Téléphone : %s%n Adresse postale : %s%n%s %s%n Mot de passe : %s%n Crédits : %s%n Administrateur :%s", 
+		String s = String.format("Numéro d'utilisateur : %s%n Pseudo : %s%n Nom : %s%n Prénom : %s%n Email : %s%n Téléphone : %d%n Adresse postale : %s%n%d %s%n Mot de passe : %s%n Crédits : %d%n Administrateur : %s", 
 		getNoUtilisateur(), getPseudo(), getNom(), getPrenom(), getEmail(), getTelephone(), getRue(), getCodePostal(), getVille(), getMotDePasse(), getCredit(), getAdministrateur());
 		return s;
 	}
+	
+	// /!\ La liste vente doit être ajoutée dans la méthode toString 
 }
