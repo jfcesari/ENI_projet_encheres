@@ -16,8 +16,8 @@ public interface UtilisateurDAO {
 		//Insérer un nouvel Utilisateur
 		public void insert(Utilisateur data) throws DALException;
 		
-		//Supprimer un utilisateur
-		public void delete(Utilisateur utilisateur) throws DALException;
+		//Supprimer un utilisateur id ou utilisateur?
+		public void delete(Utilisateur id) throws DALException;
 
 		public boolean checkForUniquePseudo(String pseudo);
 
