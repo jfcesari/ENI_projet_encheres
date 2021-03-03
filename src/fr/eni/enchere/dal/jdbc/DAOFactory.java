@@ -1,10 +1,7 @@
 package fr.eni.enchere.dal.jdbc;
 
-public abstract class DAOFactory {
-
-	public static UtilisateursDAOJdbcImpl getUtilisateurDAO()
-	{
-		return new UtilisateursDAOJdbcImpl();
-	}
-	
+public class DAOFactory {
+    public static UtilisateurDAO getDAOUtilisateur() {
+        return new UtilisateursDAOJdbcImpl();
+    }
 }
