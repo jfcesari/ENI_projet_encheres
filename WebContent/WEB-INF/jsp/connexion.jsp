@@ -8,9 +8,18 @@
 </head>
 <body>
 
-<a href="">Connexion</a>
-
 	<%@ include file="../html/entete.html" %>
+	
+	<form action="" method="post">
+		<ul>
+			<li>
+				<label for=""><img width=""/></label>
+				<input type="" id="" name="" value=""/>
+			</li>
+		</ul>
+	</form>
+	
+
 
 </body>
 </html>
