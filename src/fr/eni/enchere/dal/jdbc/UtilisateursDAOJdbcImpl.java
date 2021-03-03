@@ -19,15 +19,15 @@ private static final String sqlUserDelete = "no_utilisateur=?";
 
 	
 	public Utilisateur selectById(int id) throws DALException {
-		Connection connection=JdbcTools.connect();
+		Connection cnx=JdbcTools.connect();
 		PreparedStatement ps=null;
 		ResultSet rs=null;
 		Utilisateur utilisateur=null;
 		try {
-			connection=getConnection();
-			ps=connection.prepareStatement(sqlUserSelectbyId);
+			ps=cnx.prepareStatement(sqlUserSelectbyId);
 			ps.setInt(1, id);
 			rs=ps.executeQuery();
+			cnx.close();
 			
 		utilisateur=new Utilisateur(rs.getInt("no_utilisateur"), rs.getString("pseudo"), rs.getString("nom"), rs.getString("prenom"), rs.getString("email"), rs.getString("telephone"),  rs.getString("rue"),  rs.getString("code_postal"),  rs.getString("ville"), rs.getString("mot_de_passe"), rs.getInt("credit"), rs.getBoolean("administrateur"));
 		} catch (SQLException e) {
@@ -45,17 +45,15 @@ private static final String sqlUserDelete = "no_utilisateur=?";
 			} catch (SQLException e){
 				e.printStackTrace();
 			}
-			closeConnection();
 		}
 		return utilisateur;
 	}
 
 public void update(Utilisateur usr) throws DALException {
-	Connection connection=JdbcTools.connect();
+	Connection cnx=JdbcTools.connect();
 	PreparedStatement ps=null;
 	try {
-		connection=getConnection();
-		ps=connection.prepareStatement(sqlUserUpdate);
+		ps=cnx.prepareStatement(sqlUserUpdate);
 		
 		ps.setString(1, usr.getPseudo());
 		ps.setString(2, usr.getNom());
@@ -70,7 +68,7 @@ public void update(Utilisateur usr) throws DALException {
 		ps.setBoolean(11, usr.getAdministrateur());
 
 		ps.executeUpdate();
-
+		cnx.close();
 	} catch (SQLException e){
 		throw new DALException("Update failed ", e);
 	} finally {
@@ -81,17 +79,15 @@ public void update(Utilisateur usr) throws DALException {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		closeConnection();
 	}
 }
 
 public void insert(Utilisateur usr) throws DALException {
-	Connection connection=JdbcTools.connect();
+	Connection cnx=JdbcTools.connect();
 	PreparedStatement ps=null;
 	ResultSet keys=null;
 	try {
-		connection = getConnection();
-		ps=connection.prepareStatement(sqlUserInsert, Statement.RETURN_GENERATED_KEYS);
+		ps=cnx.prepareStatement(sqlUserInsert, Statement.RETURN_GENERATED_KEYS);
 		ps.setString(1, usr.getPseudo());
 		ps.setString(2, usr.getNom());
 		ps.setString(3, usr.getPrenom());
@@ -112,6 +108,7 @@ public void insert(Utilisateur usr) throws DALException {
 		} else {
 			throw new DALException ("Error while retrieving id.");
 		}	
+		cnx.close();
 	} catch (SQLException e) {
 		throw new DALException("Insertion failed", e);
 	} finally {
@@ -127,17 +124,15 @@ public void insert(Utilisateur usr) throws DALException {
 		} catch (SQLException e){
 			e.printStackTrace();
 		}
-		closeConnection();
 	}
 }
 
-public void delete(int id) throws DALException {
-	Connection connection=JdbcTools.connect();
+public void delete(int id) throws DALException, SQLException {
+	Connection cnx=JdbcTools.connect();
 	PreparedStatement ps = null;
 	try {
-		connection = getConnection();
-		ps = connection.prepareStatement(sqlUserDelete);
-		ps.setString(1,);
+		ps=cnx.prepareStatement(sqlUserDelete);
+		ps.setString(1,"no_utilisateur");
 		ps.executeUpdate();
 	} catch (SQLException e) {
 		throw new DALException("Deletion failed for id=" + id, e);
@@ -149,8 +144,7 @@ public void delete(int id) throws DALException {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		closeConnection();
-
+		cnx.close();
 	}
 }
 }
