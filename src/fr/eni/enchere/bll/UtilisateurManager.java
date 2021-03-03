@@ -2,6 +2,7 @@ package fr.eni.enchere.bll;
 
 import fr.eni.enchere.bo.Utilisateur;
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 import fr.eni.enchere.dal.jdbc.DAOFactory;
 import fr.eni.enchere.dal.jdbc.UtilisateurDAO;
 
@@ -64,6 +65,8 @@ public class UtilisateurManager {
         daoUsr.delete(utilisateur);
     }
 =======
+=======
+>>>>>>> Stashed changes
 
 public class UtilisateurManager {
 
@@ -89,5 +92,8 @@ public class UtilisateurManager {
 	}
 	
 	
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 }
