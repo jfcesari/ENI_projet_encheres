@@ -1,6 +1,7 @@
 package fr.eni.enchere.bll;
 
 import fr.eni.enchere.bo.Utilisateur;
+<<<<<<< Updated upstream
 import fr.eni.enchere.dal.jdbc.DAOFactory;
 import fr.eni.enchere.dal.jdbc.UtilisateurDAO;
 
@@ -62,4 +63,31 @@ public class UtilisateurManager {
     public void deleteUtilisateur (Utilisateur utilisateur) throws DALException {
         daoUsr.delete(utilisateur);
     }
+=======
+
+public class UtilisateurManager {
+
+	private static DAOUtilisateur dao;
+	
+	static {
+		dao=DAOFactory.getDAOUtilisateur();
+	}
+
+	public void createUtilisateur (Utilisateur utilisateur) throws BLLException, DALException {
+		if (!dao.checkforUniquePseudo(utilisateur.getPseudo())) {
+			bllException.addError(BLLErrors.pseudo_taken);
+		}
+		if (!dao.checkforUniqueEmail(utilisateur.getEmail())) {
+			bllException.addError(BLLErrors.email_taken);
+		}
+		if (bllExcpetion.hasErrors()) {
+			throw bllException;
+		}
+		else {
+			dao.insert(utilisateur);
+		}
+	}
+	
+	
+>>>>>>> Stashed changes
 }
