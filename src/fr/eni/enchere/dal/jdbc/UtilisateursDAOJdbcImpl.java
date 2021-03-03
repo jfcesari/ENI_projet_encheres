@@ -106,7 +106,7 @@ public void insert(Utilisateur usr) throws DALException {
 		keys = ps.getGeneratedKeys();
 		if (keys.next()) {
 			int id=keys.getInt(1);
-			art.setNo_utilisateur(id);
+			usr.setNoUtilisateur(id);
 		} else {
 			throw new DALException ("Error while retrieving id.");
 		}	
@@ -135,7 +135,7 @@ public void delete(int id) throws DALException {
 	try {
 		connection = getConnection();
 		ps = connection.prepareStatement(sqlUserDelete);
-		ps.setInt(1, no_utilisateur);
+		ps.setString(1,);
 		ps.executeUpdate();
 	} catch (SQLException e) {
 		throw new DALException("Deletion failed for id=" + id, e);

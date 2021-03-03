@@ -9,6 +9,7 @@ public interface UtilisateurDAO {
 
 		//sélectionner Utilisateur par son noUtilisateur
 		public Utilisateur selectById(int id) throws DALException;
+		
 		//Modifier les infos d'un utilisateur connu en BD
 		public void update(Utilisateur data) throws DALException;
 		
@@ -16,6 +17,10 @@ public interface UtilisateurDAO {
 		public void insert(Utilisateur data) throws DALException;
 		
 		//Supprimer un utilisateur
-		public void delete(int id) throws DALException;
+		public void delete(Utilisateur utilisateur) throws DALException;
+
+		public boolean checkForUniquePseudo(String pseudo);
+
+		public boolean checkForUniqueEmail(String email);
 
 }
