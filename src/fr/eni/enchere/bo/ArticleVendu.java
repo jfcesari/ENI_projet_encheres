@@ -11,8 +11,8 @@ public class ArticleVendu {
 	private String description;
 	private Date dateDebutEncheres;
 	private Date dateFinEncheres;
-	private float miseAPrix;
-	private float prixVente;
+	private int miseAPrix;
+	private int prixVente;
 	private String etatVente;
 	private Retrait lieuRetrait;
 	
@@ -22,7 +22,7 @@ public class ArticleVendu {
 	}
 	
 	//Constructeurs -> Article vendu sans lieu de retrait
-	public ArticleVendu(int noArticle, String nomArticle, Categorie categorieArticle, String description, Date dateDebutEncheres, Date dateFinEncheres, float miseAPrix, float prixVente, String etatVente) {
+	public ArticleVendu(int noArticle, String nomArticle, Categorie categorieArticle, String description, Date dateDebutEncheres, Date dateFinEncheres, int miseAPrix, int prixVente, String etatVente) {
 		setNoArticle(noArticle);
 		setNomArticle(nomArticle);
 		setCategorieArticle(categorieArticle);
@@ -35,7 +35,7 @@ public class ArticleVendu {
 	}
 	
 	//Constructeurs -> Article vendu avec lieu de retrait
-	public ArticleVendu(int noArticle, String nomArticle, Categorie categorieArticle, String description, Date dateDebutEncheres, Date dateFinEncheres, float miseAPrix, float prixVente, String etatVente, Retrait lieuRetrait) {
+	public ArticleVendu(int noArticle, String nomArticle, Categorie categorieArticle, String description, Date dateDebutEncheres, Date dateFinEncheres, int miseAPrix, int prixVente, String etatVente, Retrait lieuRetrait) {
 		setNoArticle(noArticle);
 		setNomArticle(nomArticle);
 		setCategorieArticle(categorieArticle);
@@ -97,19 +97,19 @@ public class ArticleVendu {
 		this.dateFinEncheres = dateFinEncheres;
 	}
 	
-	public float getMiseAPrix() {
+	public int getMiseAPrix() {
 		return miseAPrix;
 	}
 	
-	public void setMiseAPrix(float miseAPrix) {
+	public void setMiseAPrix(int miseAPrix) {
 		this.miseAPrix = miseAPrix;
 	}
 	
-	public float getPrixVente() {
+	public int getPrixVente() {
 		return prixVente;
 	}
 	
-	public void setPrixVente(float prixVente) {
+	public void setPrixVente(int prixVente) {
 		this.prixVente = prixVente;
 	}
 	
@@ -131,13 +131,13 @@ public class ArticleVendu {
 
 	@Override
 	public String toString() {
-		if(lieuRetrait.isEmpty()) {
-			String s = String.format("Numéro de l'article : %d%n Nom de l'article : %s%n Catégorie de l'article : %s%n Description : %s%n Date début de l'enchère : %s%n Date fin de l'enchère : %s%n Mise à prix : %.2f%n Prix de vente : %.2f%n État de la vente : %s%n Lieu de retrait : %s%n", 
+		String s = new String();
+		if(lieuRetrait.toString().isEmpty()) {
+			s = String.format("Numéro de l'article : %d%n Nom de l'article : %s%n Catégorie de l'article : %s%n Description : %s%n Date début de l'enchère : %s%n Date fin de l'enchère : %s%n Mise à prix : %d%n Prix de vente : %d%n État de la vente : %s%n Lieu de retrait : %s%n", 
 			getNoArticle(), getNomArticle(), getCategorieArticle(), getDescription(), getDateDebutEncheres(), getDateFinEncheres(), getMiseAPrix(), getPrixVente(), getEtatVente(), getLieuRetrait());
 		} else {
-			String s = String.format("Numéro de l'article : %d%n Nom de l'article : %s%n Catégorie de l'article : %s%n Description : %s%n Date début de l'enchère : %s%n Date fin de l'enchère : %s%n Mise à prix : %.2f%n Prix de vente : %.2f%n État de la vente : %s%n", 
+			s = String.format("Numéro de l'article : %d%n Nom de l'article : %s%n Catégorie de l'article : %s%n Description : %s%n Date début de l'enchère : %s%n Date fin de l'enchère : %s%n Mise à prix : %d%n Prix de vente : %d%n État de la vente : %s%n", 
 			getNoArticle(), getNomArticle(), getCategorieArticle(), getDescription(), getDateDebutEncheres(), getDateFinEncheres(), getMiseAPrix(), getPrixVente(), getEtatVente());	
-		}
-		return s;
+		} return s;
 	}	
 }

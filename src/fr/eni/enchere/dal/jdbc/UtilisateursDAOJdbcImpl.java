@@ -7,6 +7,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 import fr.eni.enchere.bo.Utilisateur;
+import fr.eni.enchere.dal.jdbc.ConnectionProvider;
+import fr.eni.enchere.dal.jdbc.UtilisateurDAO;
 
 public class UtilisateursDAOJdbcImpl implements UtilisateurDAO {
 
@@ -27,7 +29,7 @@ private static final String sqlUserDelete = "no_utilisateur=?";
 			ps.setInt(1, id);
 			rs=ps.executeQuery();
 			
-		utilisateur=new Utilisateur(rs.getInt("no_utilisateur"), rs.getString("pseudo"), rs.getString("nom"), rs.getString("prenom"), rs.getString("email"), rs.getInt("telephone"),  rs.getString("rue"),  rs.getInt("code_postal"),  rs.getString("ville"), rs.getString("mot_de_passe"), rs.getInt("credit"), rs.getBoolean("administrateur"));
+		utilisateur=new Utilisateur(rs.getInt("no_utilisateur"), rs.getString("pseudo"), rs.getString("nom"), rs.getString("prenom"), rs.getString("email"), rs.getString("telephone"),  rs.getString("rue"),  rs.getString("code_postal"),  rs.getString("ville"), rs.getString("mot_de_passe"), rs.getInt("credit"), rs.getBoolean("administrateur"));
 		} catch (SQLException e) {
 			throw new DALException("Request failed for id "+id, e);
 		} finally {
@@ -59,9 +61,9 @@ public void update(Utilisateur usr) throws DALException {
 		ps.setString(2, usr.getNom());
 		ps.setString(3, usr.getPrenom());
 		ps.setString(4, usr.getEmail());
-		ps.setInt(5, usr.getTelephone());
+		ps.setString(5, usr.getTelephone());
 		ps.setString(6, usr.getRue());
-		ps.setInt(7, usr.getCodePostal());
+		ps.setString(7, usr.getCodePostal());
 		ps.setString(8, usr.getVille());
 		ps.setString(9, usr.getMotDePasse());
 		ps.setInt(10, usr.getCredit());
@@ -94,9 +96,9 @@ public void insert(Utilisateur usr) throws DALException {
 		ps.setString(2, usr.getNom());
 		ps.setString(3, usr.getPrenom());
 		ps.setString(4, usr.getEmail());
-		ps.setInt(5, usr.getTelephone());
+		ps.setString(5, usr.getTelephone());
 		ps.setString(6, usr.getRue());
-		ps.setInt(7, usr.getCodePostal());
+		ps.setString(7, usr.getCodePostal());
 		ps.setString(8, usr.getVille());
 		ps.setString(9, usr.getMotDePasse());
 		ps.setInt(10, usr.getCredit());

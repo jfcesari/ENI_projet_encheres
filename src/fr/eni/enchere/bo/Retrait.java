@@ -4,7 +4,7 @@ public class Retrait {
 
 	//Attributs
 	private String rue;
-	private int codePostal;
+	private String codePostal;
 	private String ville;
 	
 	//Constructeurs
@@ -12,7 +12,7 @@ public class Retrait {
 		//
 	}
 	
-	public Retrait(String rue, int codePostal, String ville) {
+	public Retrait(String rue, String codePostal, String ville) {
 		setRue(rue);
 		setCodePostal(codePostal);
 		setVille(ville);
@@ -28,11 +28,11 @@ public class Retrait {
 		this.rue = rue;
 	}
 
-	public int getCodePostal() {
+	public String getCodePostal() {
 		return codePostal;
 	}
 
-	public void setCodePostal(int codePostal) {
+	public void setCodePostal(String codePostal) {
 		this.codePostal = codePostal;
 	}
 
@@ -46,7 +46,7 @@ public class Retrait {
 	
 	@Override
 	public String toString() {
-		String s = String.format("Lieu de retrait : %s, %d %s%n", getRue(), getCodePostal(), getVille());
+		String s = String.format("Lieu de retrait : %s, %s %s%n", getRue(), getCodePostal(), getVille());
 		return s;
 	}
 }
