@@ -1,5 +1,7 @@
 package fr.eni.enchere.bo;
 
+import java.util.Date;
+
 public class Enchere {
 
 	//Attributs

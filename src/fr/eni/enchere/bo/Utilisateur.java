@@ -1,5 +1,8 @@
 package fr.eni.enchere.bo;
 
+import java.util.List;
+import java.util.ArrayList;
+
 public class Utilisateur {
 	
 	//Attributs
@@ -22,7 +25,7 @@ public class Utilisateur {
 		//
 	}
 	
-	public Utilisateur(int noUtilisateur, String pseudo, String nom, String prenom,	String email, int telephone, String rue, int codePostal, String ville, String motDePasse, float credit, String administrateur) {
+	public Utilisateur(int noUtilisateur, String pseudo, String nom, String prenom,	String email, int telephone, String rue, int codePostal, String ville, String motDePasse, int credit, boolean administrateur) {
 		setNoUtilisateur(noUtilisateur);
 		setPseudo(pseudo);
 		setNom(nom);
