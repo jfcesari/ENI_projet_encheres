@@ -33,6 +33,14 @@ public class JdbcTools {
 		return connection;
 	}
 	
-
+	 static Connection connect() {
+	        Connection cnx = null;
+	        try {
+	            cnx = ConnectionProvider.getConnection();
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	        }
+	        return cnx;
+	        }
 
 }
