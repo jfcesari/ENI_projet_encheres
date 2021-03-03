@@ -1,7 +1,6 @@
 package fr.eni.enchere.bo;
 
 import java.util.Date;
-import java.lang.String.isEmpty;
 
 public class ArticleVendu {
 	
