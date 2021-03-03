@@ -7,6 +7,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 import fr.eni.enchere.bo.Utilisateur;
+import fr.eni.enchere.dal.jdbc.ConnectionProvider;
+import fr.eni.enchere.dal.jdbc.UtilisateurDAO;
 
 public class UtilisateursDAOJdbcImpl implements UtilisateurDAO {
 
