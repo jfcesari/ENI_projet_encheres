@@ -1,5 +1,8 @@
 package fr.eni.enchere.bo;
 
+import java.util.Date;
+import java.lang.String.isEmpty;
+
 public class ArticleVendu {
 	
 	//Attributs
@@ -131,10 +134,11 @@ public class ArticleVendu {
 	public String toString() {
 		if(lieuRetrait.isEmpty()) {
 			String s = String.format("Numéro de l'article : %d%n Nom de l'article : %s%n Catégorie de l'article : %s%n Description : %s%n Date début de l'enchère : %s%n Date fin de l'enchère : %s%n Mise à prix : %.2f%n Prix de vente : %.2f%n État de la vente : %s%n Lieu de retrait : %s%n", 
-			setNoArticle(noArticle), getNomArticle(), getCategorieArticle(), getDescription(), getDateDebutEncheres(), getDateFinEncheres(), getMiseAPrix(), getPrixVente(), getEtatVente(), getLieuRetrait());
-		} else
+			getNoArticle(), getNomArticle(), getCategorieArticle(), getDescription(), getDateDebutEncheres(), getDateFinEncheres(), getMiseAPrix(), getPrixVente(), getEtatVente(), getLieuRetrait());
+		} else {
 			String s = String.format("Numéro de l'article : %d%n Nom de l'article : %s%n Catégorie de l'article : %s%n Description : %s%n Date début de l'enchère : %s%n Date fin de l'enchère : %s%n Mise à prix : %.2f%n Prix de vente : %.2f%n État de la vente : %s%n", 
-			setNoArticle(noArticle), getNomArticle(), getCategorieArticle(), getDescription(), getDateDebutEncheres(), getDateFinEncheres(), getMiseAPrix(), getPrixVente(), getEtatVente());	
+			getNoArticle(), getNomArticle(), getCategorieArticle(), getDescription(), getDateDebutEncheres(), getDateFinEncheres(), getMiseAPrix(), getPrixVente(), getEtatVente());	
+		}
 		return s;
 	}	
 }
