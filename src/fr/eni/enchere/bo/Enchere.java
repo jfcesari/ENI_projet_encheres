@@ -6,14 +6,14 @@ public class Enchere {
 
 	//Attributs
 	private Date dateEnchere;
-	private float montantEnchere;
+	private int montantEnchere;
 	
 	//Constructeurs
 	public Enchere() {
 		//
 	}
 	
-	public Enchere(Date dateEnchere, float montantEnchere) {
+	public Enchere(Date dateEnchere, int montantEnchere) {
 		setDateEnchere(dateEnchere);
 		setMontantEnchere(montantEnchere);
 	}
@@ -27,17 +27,17 @@ public class Enchere {
 		this.dateEnchere = dateEnchere;
 	}
 
-	public float getMontantEnchere() {
+	public int getMontantEnchere() {
 		return montantEnchere;
 	}
 
-	public void setMontantEnchere(float montantEnchere) {
+	public void setMontantEnchere(int montantEnchere) {
 		this.montantEnchere = montantEnchere;
 	}
 	
 	@Override
 	public String toString() {
-		String s = String.format("Date de l'enchère : %s%n Montant de l'enchère : %.2f€%n", getDateEnchere(), getMontantEnchere());
+		String s = String.format("Date de l'enchère : %s%n Montant de l'enchère : %d%n", getDateEnchere(), getMontantEnchere());
 		return s;
 	}
 }
