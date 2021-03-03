@@ -62,5 +62,4 @@ public class UtilisateurManager {
     public void deleteUtilisateur (Utilisateur utilisateur) throws DALException {
         daoUsr.delete(utilisateur);
     }
-
 }
