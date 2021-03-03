@@ -108,7 +108,7 @@ public void insert(Utilisateur usr) throws DALException {
 		keys = ps.getGeneratedKeys();
 		if (keys.next()) {
 			int id=keys.getInt(1);
-			art.setNo_utilisateur(id);
+			usr.setNoUtilisateur(id);
 		} else {
 			throw new DALException ("Error while retrieving id.");
 		}	
