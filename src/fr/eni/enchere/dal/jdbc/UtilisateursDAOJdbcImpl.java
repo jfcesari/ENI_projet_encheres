@@ -7,10 +7,10 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 import fr.eni.enchere.bo.Utilisateur;
-import fr.eni.enchere.dal.jdbc.ConnectionProvider;
-import fr.eni.enchere.dal.jdbc.UtilisateurDAO;
+//import fr.eni.enchere.dal.jdbc.ConnectionProvider;
+//import fr.eni.enchere.dal.jdbc.UtilisateurDAO;
 
-public class UtilisateursDAOJdbcImpl implements UtilisateurDAO {
+public abstract class UtilisateursDAOJdbcImpl implements UtilisateurDAO {
 
 private static final String sqlUserSelectbyId = "SELECT * FROM utilisateurs WHERE no_utilisateur=?";
 private static final String sqlUserUpdate = "UPDATE utilisateurs SET pseudo=?, nom=?, prenom=?, email=?, telephone=?, rue=?, code_postal=?, ville=?, mot_de_passe=?, credit=?, administrateur=?";
