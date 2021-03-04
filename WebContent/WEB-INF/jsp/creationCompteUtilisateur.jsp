@@ -16,33 +16,51 @@
 		<ul>
 			<li>
 				<label for="pseudo">Pseudo :</label>
-				<input type="text" id="pseudo" name="pseudo"/> <!-- L'identifiant peut être le mail ou le pseudo -->
+				<input type="text" id="pseudo" name="pseudo"/>
 			</li>
 			<li>
 				<label for="nom">Nom :</label>
-				<input type="text" id="nom" name="nom"/> <!-- Paramétrer le fait que le mdp apparaisse en * -->
+				<input type="text" id="nom" name="nom"/>
+			</li>
+			<li>
+				<label for="prenom">Prénom :</label>
+				<input type="text" id="prenom" name="prenom"/>
+			</li>
+			<li>
+				<label for="email">Email :</label>
+				<input type="email" id="email" name="email"/>
+			</li>
+			<li>
+				<label for="telephone">Téléphone :</label>
+				<input type="text" id="telephone" name="telephone"/>
+			</li>
+			<li>
+				<label for="rue">Rue :</label>
+				<input type="text" id="rue" name="rue"/>
+			</li>
+			<li>
+				<label for="codePostal">Code postal :</label>
+				<input type="text" id="codePostal" name="codePostal"/>
+			</li>
+			<li>
+				<label for="ville">Ville :</label>
+				<input type="text" id="ville" name="ville"/>
+			</li>
+			<li>
+				<label for="motDePasse">Mot de passe :</label>
+				<input type="text" id="motDePasse" name="motDePasse"/>
+			</li>
+			<li>
+				<label for="confirmationMotDePasse">Confirmation :</label>
+				<input type="text" id="confirmationMotDePasse" name="confirmationMotDePasse"/>
 			</li>
 		</ul>
 			
-		<button type="submit">Connexion</button>
+		<button type="submit">Créer</button>
 		
-		<div class="checkbox">
-			<label for="souvenirUtilisateur">
-				<input type="checkbox" id="souvenirUtilisateur" name="souvenirUtilisateur" value="1"/> <!-- Quelle valeur attribuer ? Si nb récup =1, on enregistre, si non, on enregistre pas ? -->
-				Se souvenir de moi
-			</label>
-		</div>
-	
-		<a href="motDePasseOublie.jsp">Mot de passe oublié</a> <!-- Vers quoi renvoit ce lien ? -->
+		<button onclick="">Annuler</button> <!-- Dois renvoyer à la page d'accueil -->
 		
 	</form>
-
-	
-	
-	<div class="button">
-		<button onclick="creationCompteUtilisateur.jsp">Créer un compte</button> <!-- Ajouter le lien vers la page de création du compte utilisateur -->
-	</div>
-
 
 </body>
 </html>
