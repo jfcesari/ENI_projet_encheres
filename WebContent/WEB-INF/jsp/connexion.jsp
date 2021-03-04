@@ -31,14 +31,14 @@
 			</label>
 		</div>
 	
-		<a href="motDePasseOublie.jsp">Mot de passe oublié</a> <!-- Vers quoi renvoit ce lien ? -->
+		<a href="/WEB-INF/jsp/motDePasseOublie.jsp">Mot de passe oublié</a> <!-- Vers quoi renvoit ce lien ? -->
 		
 	</form>
 
 	
 	
 	<div class="button">
-		<button onclick="creationCompteUtilisateur.jsp">Créer un compte</button> <!-- Ajouter le lien vers la page de création du compte utilisateur -->
+		<button onclick="/WEB-INF/jsp/creationCompteUtilisateur.jsp">Créer un compte</button> <!-- Ajouter le lien vers la page de création du compte utilisateur -->
 	</div>
 
 
