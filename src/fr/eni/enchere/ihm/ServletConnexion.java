@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import fr.eni.enchere.bll.BLLException;
 import fr.eni.enchere.dal.jdbc.DALException;
 
 /**
@@ -31,13 +32,12 @@ public class ServletConnexion extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/connexion.jsp");
 		if (request.isUserInRole("basic_user")) {
-            SessionManagement.setSessionConnected(request);
+            GestionSession.setSessionConnected(request);
             try {
                 // Set the user informations in the session in order to display them everywhere
-                SessionManagement.setUtilisateurSessionBean(request, request.getUserPrincipal().getName());
-            } catch (DALException e) {
+                GestionSession.setUtilisateurSessionBean(request, request.getUserPrincipal().getName());
+            } catch (DALException | BLLException e) {
                 // This is serious
                 response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
             }
@@ -52,7 +52,7 @@ public class ServletConnexion extends HttpServlet {
         } else {
             // 1st call to this servlet : GET request without any session bean set
             request.setAttribute("page", "login");
-            RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/index.jsp");
+            RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/connexion.jsp");
             rd.forward(request, response);
         }
 	}
@@ -61,6 +61,23 @@ public class ServletConnexion extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doGet(request, response);
-	}
+		RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/index.jsp");
+        if (request.getRequestURI().contains("error")) {
+            // display errors
+            request.setAttribute("page", "login");
+            request.setAttribute("login_error", "true");
+            rd.forward(request, response);
+        } else if (request.isUserInRole("basic_user")) {
+            // authentication sucess !
+            GestionSession.setSessionConnected(request);
+            try {
+                // Set the user informations in the session in order to display them everywhere
+                GestionSession.setUtilisateurSessionBean(request, request.getUserPrincipal().getName());
+            } catch (DALException | BLLException e) {
+                // This is serious
+                response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            }
+            response.sendRedirect(request.getContextPath());
+        }
+    }
 }

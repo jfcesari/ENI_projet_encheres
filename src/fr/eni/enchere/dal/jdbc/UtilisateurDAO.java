@@ -1,9 +1,9 @@
 package fr.eni.enchere.dal.jdbc;
 
 import	fr.eni.enchere.bo.Utilisateur;
-import	fr.eni.enchere.dal.jdbc.UtilisateursDAOJdbcImpl;
+//import	fr.eni.enchere.dal.jdbc.UtilisateursDAOJdbcImpl;
 
-import java.util.List;
+//import java.util.List;
 
 public interface UtilisateurDAO {
 

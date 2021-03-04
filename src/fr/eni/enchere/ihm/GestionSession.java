@@ -1,5 +1,6 @@
 package fr.eni.enchere.ihm;
 
+import fr.eni.enchere.bll.BLLException;
 import fr.eni.enchere.bll.UtilisateurManager;
 import fr.eni.enchere.bo.Utilisateur;
 import fr.eni.enchere.dal.jdbc.DALException;
@@ -33,7 +34,7 @@ public class GestionSession {
      * @param pseudo_utilisateur String
      * @throws DALException If there were any SQL issue into the DAL
      */
-    public static void setUtilisateurSessionBean(HttpServletRequest request, String pseudo_utilisateur) throws DALException {
+    public static void setUtilisateurSessionBean(HttpServletRequest request, String pseudo_utilisateur) throws DALException, BLLException {
         UtilisateurManager um = new UtilisateurManager();
         HttpSession session = request.getSession();
         Utilisateur utilisateurToBean = um.getUtilisateurByPseudo(pseudo_utilisateur);
