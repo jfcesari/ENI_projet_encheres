@@ -8,6 +8,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import fr.eni.enchere.dal.jdbc.DALException;
 
 /**
  * Servlet implementation class ServletConnexion
@@ -30,6 +33,29 @@ public class ServletConnexion extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/connexion.jsp");
 		rd.forward(request, response);
+		if (request.isUserInRole("basic_user")) {
+            SessionManagement.setSessionConnected(request);
+            try {
+                // Set the user informations in the session in order to display them everywhere
+                SessionManagement.setUtilisateurSessionBean(request, request.getUserPrincipal().getName());
+            } catch (DALException e) {
+                // This is serious
+                response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            }
+            HttpSession session = request.getSession();
+            // If there is this session attribute, we redirect to it
+            if (session.getAttribute("uriAndParamsRequested") != null) {
+                response.sendRedirect((String) session.getAttribute("uriAndParamsRequested"));
+            } else {
+                response.sendRedirect(request.getContextPath());
+            }
+
+        } else {
+            // 1st call to this servlet : GET request without any session bean set
+            request.setAttribute("page", "login");
+            RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/index.jsp");
+            rd.forward(request, response);
+        }
 	}
 
 	/**
@@ -38,5 +64,4 @@ public class ServletConnexion extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);
 	}
-
 }
