@@ -31,7 +31,7 @@
 			</label>
 		</div>
 	
-		<a href="/jsp/motDePasseOublie.jsp">Mot de passe oublié</a> <!-- Vers quoi renvoit ce lien ? -->
+		<a href="/jsp/motDePasseOublie.jsp">Mot de passe oublié</a> <!-- Dois renvoyer vers une servlet qui retrouvera l'utilisateur + envoie un mail -->
 		
 	</form>
 
