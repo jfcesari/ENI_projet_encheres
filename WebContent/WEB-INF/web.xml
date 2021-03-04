@@ -9,4 +9,16 @@
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
+  
+  <!-- connexion.jsp -->
+  <servlet>
+  	<servlet-name>connexion</servlet-name>
+  	<jsp-file>/WEB-INF/jsp/connexion.jsp</jsp-file>
+  </servlet>
+  
+  <servlet-mapping>
+  	<servlet-name>connexion</servlet-name>
+  	<url-pattern>/jsp/connexion</url-pattern>
+  </servlet-mapping>
+  
 </web-app>
