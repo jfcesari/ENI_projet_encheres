@@ -16,7 +16,7 @@ import fr.eni.enchere.dal.jdbc.DALException;
 /**
  * Servlet implementation class ServletConnexion
  */
-@WebServlet("/jsp/ServletConnexion")
+@WebServlet("/ServletConnexion")
 public class ServletConnexion extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -52,7 +52,7 @@ public class ServletConnexion extends HttpServlet {
         } else {
             // 1st call to this servlet : GET request without any session bean set
             request.setAttribute("page", "login");
-            RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/connexion.jsp");
+            RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/jsp/connexion.jsp");
             rd.forward(request, response);
         }
 	}
@@ -61,7 +61,7 @@ public class ServletConnexion extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/index.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/jsp/connexion.jsp");
         if (request.getRequestURI().contains("error")) {
             // display errors
             request.setAttribute("page", "login");

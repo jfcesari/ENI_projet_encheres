@@ -18,7 +18,7 @@
 			</li>
 			<li>
 				<label for="motDePasse">Mot de passe :</label>
-				<input type="text" id="motDePasse" name="motDePasse"/> <!-- Paramétrer le fait que le mdp apparaisse en * -->
+				<input type="password" id="motDePasse" name="motDePasse"/> <!-- Paramétrer le fait que le mdp apparaisse en * -->
 			</li>
 		</ul>
 			
@@ -31,7 +31,7 @@
 			</label>
 		</div>
 	
-		<a href="/jsp/motDePasseOublie.jsp">Mot de passe oublié</a> <!-- Dois renvoyer vers une servlet qui retrouvera l'utilisateur + envoie un mail -->
+		<a href="/jsp/NewFile.html">Mot de passe oublié</a> <!-- Dois renvoyer vers une servlet qui retrouvera l'utilisateur + envoie un mail -->
 		
 	</form>
 
