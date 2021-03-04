@@ -58,4 +58,34 @@ public class UtilisateurManager {
     public void deleteUtilisateur (Utilisateur utilisateur) throws DALException {
         daoUsr.delete(utilisateur);
     }
+    
+    private BLLException validateUtilisateur(Utilisateur utilisateur) {
+        BLLException bllException = new BLLException();
+
+        if (utilisateur.getPseudo().length()>30) {
+            bllException.addError(BLLErrors.length_pseudo);
+        }
+        if (utilisateur.getNom().length()>30) {
+            bllException.addError(BLLErrors.length_nom);
+        }
+        if (utilisateur.getPrenom().length()>30) {
+            bllException.addError(BLLErrors.length_prenom);
+        }
+        if (utilisateur.getEmail().length()>40) {
+            bllException.addError(BLLErrors.length_email);
+        }
+        if (utilisateur.getTelephone().length()>15) {
+            bllException.addError(BLLErrors.length_telephone);
+        }
+        if (utilisateur.getRue().length()>30) {
+            bllException.addError(BLLErrors.length_rue);
+        }
+        if (utilisateur.getCodePostal().length()>30) {
+            bllException.addError(BLLErrors.length_codepostal);
+        }
+        if (utilisateur.getVille().length()>30) {
+            bllException.addError(BLLErrors.length_ville);
+        }
+        return bllException;
+    }
 }
