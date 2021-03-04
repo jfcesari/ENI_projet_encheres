@@ -32,7 +32,6 @@ public class ServletConnexion extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/connexion.jsp");
-		rd.forward(request, response);
 		if (request.isUserInRole("basic_user")) {
             SessionManagement.setSessionConnected(request);
             try {
