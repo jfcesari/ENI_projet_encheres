@@ -17,6 +17,11 @@ public class UtilisateurManager {
         return daoUsr.selectById(id);
     }
     
+    // selectByPseudo
+	public Utilisateur getUtilisateurByPseudo(String pseudo_utilisateur) throws DALException {
+        return daoUsr.selectByPseudo(pseudo_utilisateur);
+	}
+    
     //CRUD: update
     public void updateUtilisateur (Utilisateur utilisateur, boolean checkForMail, boolean checkForPseudo) throws BLLException, DALException {
         BLLException bllException = validateUtilisateur(utilisateur);
@@ -88,4 +93,5 @@ public class UtilisateurManager {
         }
         return bllException;
     }
+
 }

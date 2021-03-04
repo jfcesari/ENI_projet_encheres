@@ -15,7 +15,7 @@ private static final String sqlUserSelectbyId = "SELECT * FROM utilisateurs WHER
 private static final String sqlUserUpdate = "UPDATE utilisateurs SET pseudo=?, nom=?, prenom=?, email=?, telephone=?, rue=?, code_postal=?, ville=?, mot_de_passe=?, credit=?, administrateur=?";
 private static final String sqlUserInsert = "INSERT into utilisateurs (pseudo,nom,prenom,email,telephone,rue,code_postal,ville,mot_de_passe,credit,administrateur) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
 private static final String sqlUserDelete = "no_utilisateur=?";
-
+private static final String sqlUserSelectbyPseudo = "SELECT * FROM utilisateurs WHERE pseudo=?";
 	
 	public Utilisateur selectById(int id) throws DALException {
 		Connection cnx=JdbcTools.connect();
@@ -47,6 +47,37 @@ private static final String sqlUserDelete = "no_utilisateur=?";
 		}
 		return utilisateur;
 	}
+	
+	public Utilisateur selectByPseudo(String pseudo_utilisateur) throws DALException {
+	Connection cnx=JdbcTools.connect();
+	PreparedStatement ps=null;
+	ResultSet rs=null;
+	Utilisateur utilisateur=null;
+	try {
+		ps=cnx.prepareStatement(sqlUserSelectbyPseudo);
+		ps.setString(1, pseudo_utilisateur);
+		rs=ps.executeQuery();
+		cnx.close();
+		
+	utilisateur=new Utilisateur(rs.getInt("no_utilisateur"), rs.getString("pseudo"), rs.getString("nom"), rs.getString("prenom"), rs.getString("email"), rs.getString("telephone"),  rs.getString("rue"),  rs.getString("code_postal"),  rs.getString("ville"), rs.getString("mot_de_passe"), rs.getInt("credit"), rs.getBoolean("administrateur"));
+	} catch (SQLException e) {
+		throw new DALException("Request failed for user "+pseudo_utilisateur, e);
+	} finally {
+		try {
+			rs.close();
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		}
+		try {
+			if(ps != null) {
+				ps.close();
+			}
+		} catch (SQLException e){
+			e.printStackTrace();
+		}
+	}
+	return utilisateur;
+}
 
 public void update(Utilisateur usr) throws DALException {
 	Connection cnx=JdbcTools.connect();

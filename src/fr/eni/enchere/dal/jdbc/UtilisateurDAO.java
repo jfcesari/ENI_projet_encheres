@@ -23,4 +23,6 @@ public interface UtilisateurDAO {
 
 		public boolean checkForUniqueEmail(String email);
 
+		public Utilisateur selectByPseudo(String pseudo_utilisateur) throws DALException;
+
 }
