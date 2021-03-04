@@ -53,11 +53,6 @@ public class UtilisateurManager {
             daoUsr.insert(utilisateur);
         }
     }
-    
-    private BLLException validateUtilisateur(Utilisateur utilisateur) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	//CRUD: delete
     public void deleteUtilisateur (Utilisateur utilisateur) throws DALException {

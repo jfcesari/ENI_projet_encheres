@@ -7,7 +7,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 import fr.eni.enchere.bo.Utilisateur;
-import fr.eni.enchere.dal.jdbc.ConnectionProvider;
 import fr.eni.enchere.dal.jdbc.UtilisateurDAO;
 
 public class UtilisateursDAOJdbcImpl implements UtilisateurDAO {
@@ -146,5 +145,23 @@ public void delete(int id) throws DALException, SQLException {
 		}
 		cnx.close();
 	}
+}
+
+@Override
+public void delete(Utilisateur id) throws DALException {
+	// TODO Auto-generated method stub
+	
+}
+
+@Override
+public boolean checkForUniquePseudo(String pseudo) {
+	// TODO Auto-generated method stub
+	return false;
+}
+
+@Override
+public boolean checkForUniqueEmail(String email) {
+	// TODO Auto-generated method stub
+	return false;
 }
 }
