@@ -1,5 +1,7 @@
 package fr.eni.enchere.dal.jdbc;
 
+import java.util.List;
+
 public class DALException extends Exception {
 
 	/**
@@ -29,5 +31,13 @@ public class DALException extends Exception {
 		return sb.toString() ;
 	}
 	
+    /**
+     * Returns the list of the error codes stored in the instance
+     * @return List
+     */
+    public List<Integer> getListErrorCodes()
+    {
+        return this.getListErrorCodes();
+    }
 	
 }
