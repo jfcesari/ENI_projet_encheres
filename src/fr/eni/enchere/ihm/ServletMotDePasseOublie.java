@@ -10,18 +10,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class ServletCreationUtilisateur
+ * Servlet implementation class ServletMotDePasseOublie
  */
-@WebServlet("/jsp/ServletCreationUtilisateur")
-public class ServletCreationUtilisateur extends HttpServlet {
+@WebServlet("/ServletMotDePasseOublie")
+public class ServletMotDePasseOublie extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
+       
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/creationCompteUtilisateur.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/jsp/motDePasseOublie.jsp");
 		rd.forward(request, response);
 		
 	}
@@ -30,7 +30,6 @@ public class ServletCreationUtilisateur extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 

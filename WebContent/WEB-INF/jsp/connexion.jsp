@@ -31,14 +31,14 @@
 			</label>
 		</div>
 	
-		<a href="WEB-INF/html/motDePasseOublie.html">Mot de passe oublié</a> <!-- Dois renvoyer vers une servlet qui retrouvera l'utilisateur + envoie un mail -->
+		<a href="<%=request.getContextPath()%>/motDePasseOublie">Mot de passe oublié</a> <!-- Dois renvoyer vers une servlet qui retrouvera l'utilisateur + envoie un mail -->
 		
 	</form>
 
 	
 	
 	<div class="button">
-		<a href="creationCompteUtilisateur.jsp"><button>Créer un compte</button></a> <!-- Ajouter le lien vers la page de création du compte utilisateur -->
+		<a href="<%=request.getContextPath()%>/creationCompteUtilisateur.jsp"><button>Créer un compte</button></a> <!-- Ajouter le lien vers la page de création du compte utilisateur -->
 	</div>
 
 
