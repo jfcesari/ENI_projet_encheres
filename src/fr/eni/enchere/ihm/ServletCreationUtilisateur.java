@@ -1,6 +1,8 @@
 package fr.eni.enchere.ihm;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -8,6 +10,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import fr.eni.enchere.bll.BLLException;
+import fr.eni.enchere.bll.UtilisateurManager;
+import fr.eni.enchere.bo.Utilisateur;
+import fr.eni.enchere.dal.jdbc.DALException;
 
 /**
  * Servlet implementation class ServletCreationUtilisateur
@@ -22,16 +29,56 @@ public class ServletCreationUtilisateur extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/creationCompteUtilisateur.jsp");
-		rd.forward(request, response);
-		
-	}
+        request.setAttribute("page", "createLogin");
+        rd.forward(request, response);
+    }
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
-	}
-
+		request.setCharacterEncoding("UTF-8");
+        UtilisateurManager um = new UtilisateurManager();
+        List<String> errors = new ArrayList<>();
+        // Hash password
+        String password = request.getParameter("password");
+        String generatedPassword = PasswordManagement.hashPassword(password);
+        // New user
+        Utilisateur utilisateur = new Utilisateur(
+                request.getParameter("pseudo"),
+                request.getParameter("nom"),
+                request.getParameter("prenom"),
+                request.getParameter("email"),
+                request.getParameter("telephone"),
+                request.getParameter("rue"),
+                request.getParameter("codePostal"),
+                request.getParameter("ville"),
+                generatedPassword,
+                0,
+                false
+        );
+        RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/index.jsp");
+        try {
+            um.createUtilisateur(utilisateur);
+        } catch (BLLException e) {
+            ErrorsManagement.BLLExceptionsCatcher(e, errors, request);
+        } catch (DALException e) {
+            ErrorsManagement.DALExceptionsCatcher(e, errors, request);
+        }
+        if (errors.isEmpty()) {
+            try {
+                RequestManagement.processHomePageAttributes(request);
+            } catch (DALException e) {
+                ErrorsManagement.DALExceptionsCatcher(e, errors, request);
+            } catch (BLLException e) {
+                ErrorsManagement.BLLExceptionsCatcher(e, errors, request);
+            }
+            request.setAttribute("loginCreated", "true");
+            request.setAttribute("page", "home");
+        } else {
+            request.setAttribute("page", "createLogin");
+            request.setAttribute("utilisateurError", utilisateur);
+        }
+        rd.forward(request, response);
+    }
 }
