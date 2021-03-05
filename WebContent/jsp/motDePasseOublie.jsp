@@ -8,7 +8,7 @@
 </head>
 <body>
 
-	<%@ include file="../html/entete.html" %>
+	<%@ include file="/WEB-INF/html/entete.html" %>
 
 	<h1 style="text-align:center">Mot de passe oublié</h1>
 	<h2>Veuillez saisir votre email pour réinitialiser votre mot de passe</h2>

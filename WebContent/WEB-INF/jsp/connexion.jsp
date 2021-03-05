@@ -31,7 +31,11 @@
 			</label>
 		</div>
 	
+<<<<<<< HEAD
 		<a href="<%=request.getContextPath()%>/ServletMotDePasseOublie">Mot de passe oublié</a> <!-- Dois renvoyer vers une servlet qui retrouvera l'utilisateur + envoie un mail -->
+=======
+		<a href="<%=request.getContextPath()%>/jsp/motDePasseOublie.jsp">Mot de passe oublié</a> <!-- Dois renvoyer vers une servlet qui retrouvera l'utilisateur + envoie un mail -->
+>>>>>>> 92b54e88bdd1405e2b8e094f2fce3d73dae69313
 		
 	</form>
 
