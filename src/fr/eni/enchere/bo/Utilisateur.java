@@ -40,6 +40,20 @@ public class Utilisateur {
 		setAdministrateur(administrateur);
 	}
 	
+	public Utilisateur(String pseudo, String nom, String prenom,	String email, String telephone, String rue, String codePostal, String ville, String motDePasse, int credit, boolean administrateur) {
+		setPseudo(pseudo);
+		setNom(nom);
+		setPrenom(prenom);
+		setEmail(email);
+		setTelephone(telephone);
+		setRue(rue);
+		setCodePostal(codePostal);
+		setVille(ville);
+		setMotDePasse(motDePasse);
+		setCredit(credit);
+		setAdministrateur(administrateur);
+	}
+	
 	
 	//Getter et Setter
 	public List<ArticleVendu> getVente() {
