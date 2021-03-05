@@ -1,9 +1,9 @@
 package fr.eni.enchere.bll;
 
 import fr.eni.enchere.bo.Utilisateur;
+import fr.eni.enchere.dal.DAOFactory;
+import fr.eni.enchere.dal.UtilisateurDAO;
 import fr.eni.enchere.dal.jdbc.DALException;
-import fr.eni.enchere.dal.jdbc.DAOFactory;
-import fr.eni.enchere.dal.jdbc.UtilisateurDAO;
 
 public class UtilisateurManager {
 	private static UtilisateurDAO daoUsr;

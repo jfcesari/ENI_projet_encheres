@@ -81,16 +81,16 @@ public class ArticleVendu {
 		this.description = description;
 	}
 	
-	public Date getDateDebutEncheres() {
-		return dateDebutEncheres;
+	public java.sql.Date getDateDebutEncheres() {
+		return (java.sql.Date)dateDebutEncheres;
 	}
 	
 	public void setDateDebutEncheres(Date dateDebutEncheres) {
 		this.dateDebutEncheres = dateDebutEncheres;
 	}
 	
-	public Date getDateFinEncheres() {
-		return dateFinEncheres;
+	public java.sql.Date getDateFinEncheres() {
+		return (java.sql.Date)dateFinEncheres;
 	}
 	
 	public void setDateFinEncheres(Date dateFinEncheres) {
