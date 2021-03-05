@@ -38,7 +38,13 @@ public class ServletCreationUtilisateur extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
-        UtilisateurManager um = new UtilisateurManager();
+        UtilisateurManager um= null;
+		try {
+			um = new UtilisateurManager();
+		} catch (BLLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
         List<String> errors = new ArrayList<>();
         // Hash password
         String password = request.getParameter("password");
