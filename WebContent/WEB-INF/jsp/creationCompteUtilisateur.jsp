@@ -12,7 +12,7 @@
 
 	<h1>Mon profil</h1>
 	
-	<form action="<%=request.getContextPath()%>/ServletConnection" method="post"> <!-- Mettre dans action le chemin de la page vers laquelle les infos seront envoyées -->
+	<form action="<%=request.getContextPath()%>" method="post"> <!-- Mettre dans action le chemin de la page vers laquelle les infos seront envoyées -->
 		<ul>
 			<li>
 				<label for="pseudo">Pseudo :</label>
