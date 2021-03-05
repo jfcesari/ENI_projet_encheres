@@ -7,12 +7,17 @@
 <title></title>
 </head>
 <body>
+
+	<%@ include file="../html/entete.html" %>
+
 	<h1 class="text-center">Liste des enchères</h1>
 
 	@WebFilter (dispatcherTypes={
 	DispatcherType.REQUEST,
 	},
 	urlPatterns={"url"})
+	
+	
 	
 </body>
 </html>
