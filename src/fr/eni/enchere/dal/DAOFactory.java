@@ -7,15 +7,15 @@ public class DAOFactory {
         return new UtilisateursDAOJdbcImpl();
     }
     
-    public static ArticleVenduDAO getArticleVenduDAO() {
-        return new ArticleVenduDAOJdbcImpl();
-    }
-    
-    public static CategorieDAO getCategorieDAO() {
-        return new CategorieDAOJdbcImpl();
-    }
-    
-    public static DAOEnchere getEnchereDAO() {
-        return new EnchereDAOJdbcImpl();
-    }
+//    public static ArticleVenduDAO getArticleVenduDAO() {
+//        return new ArticleVenduDAOJdbcImpl();
+//    }
+//    
+//    public static CategorieDAO getCategorieDAO() {
+//        return new CategorieDAOJdbcImpl();
+//    }
+//    
+//    public static DAOEnchere getEnchereDAO() {
+//        return new EnchereDAOJdbcImpl();
+//    }
 }
