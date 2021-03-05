@@ -7,6 +7,16 @@
 <title>Mot de passe oublié</title>
 </head>
 <body>
-	<h1 style="text-align:center">Il fallait noter son mot de passe...</h1>
+
+	<%@ include file="../html/entete.html" %>
+
+	<h1 style="text-align:center">Mot de passe oublié</h1>
+	<h2>Veuillez saisir votre email pour réinitialiser votre mot de passe</h2>
+	
+	<form>
+		<input type="email" id="email" name="email"/>
+		
+		<button type="submit">Envoyer</button>
+	</form>
 </body>
 </html>

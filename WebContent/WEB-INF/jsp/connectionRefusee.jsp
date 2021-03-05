@@ -7,6 +7,13 @@
 <title>Connection refusée</title>
 </head>
 <body>
-	<h1 style="text-align:center">Vous ne passerez paaas</h1>
+
+	<%@ include file="../html/entete.html" %>
+
+	<h1 style="text-align:center">Connection impossible</h1>
+	<h2 style="text-align:center">Votre identifiant ou votre mot de passe est incorrect.</h2>
+	
+	<a href=""><button>Retour à la page de connexion</button></a>
+	
 </body>
 </html>
