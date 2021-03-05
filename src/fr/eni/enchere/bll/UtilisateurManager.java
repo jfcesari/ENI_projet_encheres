@@ -1,5 +1,7 @@
 package fr.eni.enchere.bll;
 
+import java.sql.SQLException;
+
 import fr.eni.enchere.bo.Utilisateur;
 import fr.eni.enchere.dal.DAOFactory;
 import fr.eni.enchere.dal.UtilisateurDAO;
@@ -60,8 +62,14 @@ public class UtilisateurManager {
     }
 
 	//CRUD: delete
-    public void deleteUtilisateur (Utilisateur utilisateur) throws DALException {
-        daoUsr.delete(utilisateur);
+    public void deleteUtilisateur (Utilisateur utilisateur) throws DALException, SQLException {
+        try {
+			daoUsr.delete(utilisateur);
+		} catch (DALException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
     }
     
     private BLLException validateUtilisateur(Utilisateur utilisateur) {

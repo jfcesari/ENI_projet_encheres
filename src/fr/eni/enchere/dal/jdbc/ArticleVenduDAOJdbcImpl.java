@@ -5,15 +5,19 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 import fr.eni.enchere.bo.ArticleVendu;
+import fr.eni.enchere.bo.Categorie;
 import fr.eni.enchere.bo.Utilisateur;
 
 public class ArticleVenduDAOJdbcImpl implements DAOArticleVendu {
 
 private static final String SqlSoldArtInsert = "INSERT INTO articles_vendus (nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, prix_vente, etat_vente, no_utilisateur, no_categorie) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 private static final String SqlSoldArtSelectById = "SELECT * FROM articles_vendus WHERE no_article = ?";
-	   
+private static final String SqlSoldArtSelectByCategory = "SELECT * FROM articles_vendus INNER JOIN categories c on articles_vendus.no_categorie = C.no_categorie WHERE C.no_categorie = ?";
+	
 		@Override
 	    public void insert(ArticleVendu soldArt) throws DALException {
 	        Connection cnx = JdbcTools.connect();
@@ -66,7 +70,6 @@ private static final String SqlSoldArtSelectById = "SELECT * FROM articles_vendu
 				ps=cnx.prepareStatement(SqlSoldArtSelectById);
 				ps.setInt(1, noArticle);
 				rs=ps.executeQuery();
-				cnx.close();
 				
 			articleVendu=new ArticleVendu(rs.getInt("noArticle"), rs.getString("nomArticle"), rs.getString("categorieArticle"), rs.getString("description"), rs.getString("dateDebutEncheres"), rs.getString("dateFinEncheres"),  rs.getInt("miseAPrix"),  rs.getInt("prixVente"),  rs.getString("etatVente"));
 			} catch (SQLException e) {
@@ -74,6 +77,7 @@ private static final String SqlSoldArtSelectById = "SELECT * FROM articles_vendu
 			} finally {
 				try {
 					rs.close();
+					cnx.close();
 				} catch (SQLException e1) {
 					e1.printStackTrace();
 				}
@@ -90,36 +94,46 @@ private static final String SqlSoldArtSelectById = "SELECT * FROM articles_vendu
 
 	    @Override
 	    public List<ArticleVendu> filterByCategory(Categorie categorie) throws DALException {
-	        Connection cnx = JdbcTools.connect();
-	        List<ArticleVendu> articlesVendus = new ArrayList<>();
-	        try {
-	            String SELECT_BY_CATEGORY = "SELECT * " +
-	                    "FROM ARTICLES_VENDUS " +
-	                    "INNER JOIN CATEGORIES C on ARTICLES_VENDUS.no_categorie = C.no_categorie " +
-	                    "WHERE C.no_categorie = ?";
-	            PreparedStatement stmt = cnx.prepareStatement(SELECT_BY_CATEGORY);
-	            stmt.setInt(1, categorie.getNoCategorie());
-	            stmt.execute();
-	            ResultSet rs =  stmt.getResultSet();
-	            while (rs.next()) {
-	                articlesVendus.add(hydrateArticleVendu(rs));
-	            }
-	            cnx.close();
-	        } catch (SQLException e) {
-	            e.printStackTrace();
-	            DALException dalException = new DALException();
-	            dalException.addError(ErrorCodesDAL.ERROR_SQL_SELECT);
-	            throw dalException;
-	        }
-	        return articlesVendus;
-	    }
+	    	Connection cnx = JdbcTools.connect();
+	    	PreparedStatement ps=null;
+			ResultSet rs=null;
+			List<ArticleVendu> list = new ArrayList<>();
+			try {
+				ps=cnx.createStatement();
+	            ps.setInt(1, categorie.getNoCategorie());
+				rs=ps.executeQuery(SqlSoldArtSelectByCategory);
+				ArticleVendu articleVendu=null;
 
-	    /**
-	     * Get every ArticleVendu from the DB from a particular state
-	     * @param etat String Values : EC, VA or AN
-	     * @return An ArrayList
-	     * @throws DALException If there is any issue with the SQL query
-	     */
+				while (rs.next()) {
+					if(ramette.equalsIgnoreCase(rs.getString("type").trim())) {
+						article=new Ramette(rs.getInt("idArticle"), rs.getString("marque"), rs.getString("reference"), rs.getString("designation"), rs.getFloat("prixUnitaire"), rs.getInt("qteStock"), rs.getInt("grammage"));
+					}
+					list.add(article);
+				}
+			} catch (SQLException e) {
+				throw new DALException("Request failed ", e);
+			} finally {
+				try {
+					rs.close();
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
+				try {
+					if(s != null) {
+						s.close();
+					}
+				} catch (SQLException e){
+					e.printStackTrace();
+				}
+			}
+			return list;
+		}
+	    	
+	    	
+	       
+	 
+	                articlesVendus.add(hydrateArticleVendu(rs));
+
 	    public List<Integer> filterByEtat(String etat) throws DALException {
 	        Connection cnx = JdbcTools.connect();
 	        List<Integer> articlesVendus = new ArrayList<>();
