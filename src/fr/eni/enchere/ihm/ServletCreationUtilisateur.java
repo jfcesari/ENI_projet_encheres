@@ -42,7 +42,7 @@ public class ServletCreationUtilisateur extends HttpServlet {
         List<String> errors = new ArrayList<>();
         // Hash password
         String password = request.getParameter("password");
-        String generatedPassword = PasswordManagement.hashPassword(password);
+        String generatedPassword = GestionMotDePasse.hashPassword(password);
         // New user
         Utilisateur utilisateur = new Utilisateur(
                 request.getParameter("pseudo"),
@@ -59,19 +59,19 @@ public class ServletCreationUtilisateur extends HttpServlet {
         );
         RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/index.jsp");
         try {
-            um.createUtilisateur(utilisateur);
+            um.insertUtilisateur(utilisateur);
         } catch (BLLException e) {
-            ErrorsManagement.BLLExceptionsCatcher(e, errors, request);
+            GestionErreur.BLLExceptionsCatcher(e, errors, request);
         } catch (DALException e) {
-            ErrorsManagement.DALExceptionsCatcher(e, errors, request);
+            GestionErreur.DALExceptionsCatcher(e, errors, request);
         }
         if (errors.isEmpty()) {
             try {
-                RequestManagement.processHomePageAttributes(request);
+                GestionRequete.processHomePageAttributes(request);
             } catch (DALException e) {
-                ErrorsManagement.DALExceptionsCatcher(e, errors, request);
+                GestionErreur.DALExceptionsCatcher(e, errors, request);
             } catch (BLLException e) {
-                ErrorsManagement.BLLExceptionsCatcher(e, errors, request);
+                GestionErreur.BLLExceptionsCatcher(e, errors, request);
             }
             request.setAttribute("loginCreated", "true");
             request.setAttribute("page", "home");
