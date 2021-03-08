@@ -17,43 +17,43 @@
 		<ul>
 			<li>
 				<label for="pseudo">Pseudo :</label>
-				<input type="text" id="pseudo" name="pseudo"/>
+				<input class="champs" type="text" id="pseudo" name="pseudo"/>
 			</li>
 			<li>
 				<label for="nom">Nom :</label>
-				<input type="text" id="nom" name="nom"/>
+				<input class="champs" type="text" id="nom" name="nom"/>
 			</li>
 			<li>
 				<label for="prenom">Prénom :</label>
-				<input type="text" id="prenom" name="prenom"/>
+				<input class="champs" type="text" id="prenom" name="prenom"/>
 			</li>
 			<li>
 				<label for="email">Email :</label>
-				<input type="email" id="email" name="email"/>
+				<input class="champs" type="email" id="email" name="email"/>
 			</li>
 			<li>
 				<label for="telephone">Téléphone :</label>
-				<input type="text" id="telephone" name="telephone"/>
+				<input class="champs" type="text" id="telephone" name="telephone"/>
 			</li>
 			<li>
 				<label for="rue">Rue :</label>
-				<input type="text" id="rue" name="rue"/>
+				<input class="champs" type="text" id="rue" name="rue"/>
 			</li>
 			<li>
 				<label for="codePostal">Code postal :</label>
-				<input type="text" id="codePostal" name="codePostal"/>
+				<input class="champs" type="text" id="codePostal" name="codePostal"/>
 			</li>
 			<li>
 				<label for="ville">Ville :</label>
-				<input type="text" id="ville" name="ville"/>
+				<input class="champs" type="text" id="ville" name="ville"/>
 			</li>
 			<li>
 				<label for="motDePasse">Mot de passe :</label>
-				<input type="text" id="motDePasse" name="motDePasse"/>
+				<input class="champs" type="text" id="motDePasse" name="motDePasse"/>
 			</li>
 			<li>
 				<label for="confirmationMotDePasse">Confirmation :</label>
-				<input type="text" id="confirmationMotDePasse" name="confirmationMotDePasse"/>
+				<input class="champs" type="text" id="confirmationMotDePasse" name="confirmationMotDePasse"/>
 			</li>
 		</ul>
 			

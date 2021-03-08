@@ -15,7 +15,7 @@
 	<h3 style="text-align:center">Veuillez saisir votre email pour réinitialiser votre mot de passe</h3>
 	
 	<form>
-		<input type="email" id="email" name="email"/>
+		<input class="champsMdp" type="email" id="email" name="email"/>
 	</form>
 	
 	<button type="submit">Envoyer</button>

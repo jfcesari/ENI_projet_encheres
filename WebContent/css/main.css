@@ -4,35 +4,42 @@ body{
 	font-family:"Roboto","Helvetica",sans-serif;
 	margin:auto;
 	text-align:center;
-	display:block;
 }
 
 h1{
 	font-weight:bold;
 }
 
-form{
-	display:block;
-}
-
 ul{
 	list-style:none;
-}
-
-.champs{
 	text-transform:bold;
 	text-decoration:none;
 }
 
-input{
-	width:250px;
+label{
+	/*display:block*/
+	margin-right:auto;
+	margin-left:auto;
+}
+
+.champs{
+	width:200px;
+	line-height:20px;
+	border:1px solid #222;
+	margin:5px 0px 0px 0px;
+}
+
+.champsMdp{
+	width:400px;
 	line-height:20px;
 	border:1px solid #222;
 }
 
+
+
 button{
 	width:160px;
-	line-height:40px;
+	line-height:34px;
 	text-align:center;
 	background:white;
 	border:1px solid #222;
