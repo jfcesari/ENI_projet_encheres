@@ -63,7 +63,7 @@ public class ServletCreationUtilisateur extends HttpServlet {
                 0,
                 false
         );
-        RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/index.jsp");
+        RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/creationCompteUtilisateur.jsp");
         try {
             um.insertUtilisateur(utilisateur);
         } catch (BLLException e) {
