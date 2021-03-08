@@ -49,11 +49,11 @@
 			</li>
 			<li>
 				<label class="txtLabel" for="motDePasse">Mot de passe :</label>
-				<input class="champs" type="text" id="motDePasse" name="motDePasse"/>
+				<input class="champs" type="password" id="motDePasse" name="motDePasse"/>
 			</li>
 			<li>
 				<label class="txtLabel" for="confirmationMotDePasse">Confirmation :</label>
-				<input class="champs" type="text" id="confirmationMotDePasse" name="confirmationMotDePasse"/>
+				<input class="champs" type="password" id="confirmationMotDePasse" name="confirmationMotDePasse"/>
 			</li>
 		</ul>
 			
