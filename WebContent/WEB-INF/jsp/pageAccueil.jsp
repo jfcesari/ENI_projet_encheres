@@ -4,28 +4,35 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title></title>
+<link rel="stylesheet" href="css/main.css"/>
+<title>Accueil</title>
 </head>
 <body>
 
 	<%@ include file="../html/entete.html" %>
 
-	<h1 class="text-center">Liste des enchères</h1>
+	<h1 class="text-center">Enchères en cours</h1>
 
+	<section class="filtre">
 	<form action="<%=request.getContextPath()%>/ServletAccueil" method="post">
 		<ul>
 			<li>
-				<label class="txtLabel" for="recherche">Filtrer :</label>
-				<input class="champs" type="text" id="recherche" name="recherche" placeholder="Le nom de l'article contient..."/> <!-- L'identifiant peut être le mail ou le pseudo -->
-				<button class="" type="submit">Rechercher</button>
+				<label class="txtLabel" for="recherche">Filtrer ma recherche</label>
 			</li>
 			<li>
-				<label class="txtLabel" for="categorie">Catégories</label>
-				<input class="champs" type="text" id="categorie" name="categorie"/> <!-- Paramétrer le fait que le mdp apparaisse en * -->
+				<select name="categorie">
+					<option value="toutesCategories">Toutes catégories</option>
+					<option class="categorie" value="categorieInformatique">Informatique</option>
+					<option class="categorie" value="categorieAmeublement">Ameublement</option>
+					<option class="categorie" value="categorieVetement">Vêtement</option>
+					<option class="categorie" value="categorieSport&Loisirs">Sport&Loisirs</option>
+				</select>
+				<input class="champs" type="search" id="recherche" name="recherche" placeholder="Le nom de l'article contient..."/> <!-- L'identifiant peut être le mail ou le pseudo -->
+				<button class="btnRecherche" type="submit">Rechercher</button>
 			</li>
 		</ul>
-	
 	</form>
+	</section>
 	
 	
 	

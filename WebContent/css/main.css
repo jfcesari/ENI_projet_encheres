@@ -55,8 +55,28 @@ label{
 	font-size:0.8em;
 }
 
-#placeholder.champs{
-	font-weight:italic;
+input[type="search"]{
+	font-style:italic;
+	font-size:0.8em;
+}
+
+select{
+	height:24px;
+	width:140px;
+	border:1px solid #222;
+	margin:5px 0px 0px 0px;
+	font-style:italic;
+	font-size:0.8em;
+	color:#777;
+}
+
+option.categorie{
+	font-style:normal;
+	color:#000;
+}
+
+section.filtre{
+	padding:0px 0px 0px 0px;
 }
 
 button{
@@ -76,4 +96,10 @@ button{
 button:hover{
 	color:#779364;
 	border:1px solid #779364;
+}
+
+.btnRecherche{
+	width:100px;
+	line-height:20px;
+	font-size:0.6em;
 }
