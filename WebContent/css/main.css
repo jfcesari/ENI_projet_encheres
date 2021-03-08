@@ -50,6 +50,10 @@ label{
 	color:#779364;
 }
 
+#placeholder.champs{
+	font-weight:italic;
+}
+
 button{
 	width:160px;
 	line-height:34px;
