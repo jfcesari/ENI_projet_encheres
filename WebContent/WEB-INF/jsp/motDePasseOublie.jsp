@@ -4,6 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="css/main.css"/>
 <title>Mot de passe oublié</title>
 </head>
 <body>
@@ -11,7 +12,7 @@
 	<%@ include file="../html/entete.html" %>
 
 	<h1 style="text-align:center">Mot de passe oublié</h1>
-	<h2 style="text-align:center">Veuillez saisir votre email pour réinitialiser votre mot de passe</h2>
+	<h3 style="text-align:center">Veuillez saisir votre email pour réinitialiser votre mot de passe</h3>
 	
 	<form>
 		<input type="email" id="email" name="email"/>

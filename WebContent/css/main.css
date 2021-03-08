@@ -1,0 +1,50 @@
+@charset "UTF-8";
+
+body{
+	font-family:"Roboto","Helvetica",sans-serif;
+	margin:auto;
+	text-align:center;
+	display:block;
+}
+
+h1{
+	font-weight:bold;
+}
+
+form{
+	display:block;
+}
+
+ul{
+	list-style:none;
+}
+
+.champs{
+	text-transform:bold;
+	text-decoration:none;
+}
+
+input{
+	width:250px;
+	line-height:20px;
+	border:1px solid #222;
+}
+
+button{
+	width:160px;
+	line-height:40px;
+	text-align:center;
+	background:white;
+	border:1px solid #222;
+	font-family:inherit;
+	font-size:0.8em;
+	font-weight:bold;
+	text-transform:uppercase;
+	text-decoration:none;
+	margin:10px 0px 0px 0px;
+}
+
+button:hover{
+	color:#779364;
+	border:1px solid #779364;
+}
