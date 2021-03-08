@@ -19,7 +19,7 @@ import fr.eni.enchere.dal.jdbc.DALException;
 /**
  * Servlet implementation class ServletCreationUtilisateur
  */
-@WebServlet("/jsp/ServletCreationUtilisateur")
+@WebServlet("/ServletCreationUtilisateur")
 public class ServletCreationUtilisateur extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
