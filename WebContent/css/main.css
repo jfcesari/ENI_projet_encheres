@@ -17,6 +17,10 @@ h1{
 	font-weight:bold;
 }
 
+form{
+	display:block;
+}
+
 ul{
 	list-style:none;
 	text-transform:bold;
@@ -48,6 +52,7 @@ label{
 
 .mdpOublie{
 	color:#779364;
+	font-size:0.8em;
 }
 
 #placeholder.champs{

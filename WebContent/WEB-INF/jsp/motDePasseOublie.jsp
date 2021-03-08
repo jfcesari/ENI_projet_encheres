@@ -16,11 +16,15 @@
 	
 	<form>
 		<input class="champsMdp" type="email" id="email" name="email"/>
+		
+		<div type="button">
+			<button type="submit">Envoyer</button>
+		</div>
+		
 	</form>
 	
 	<a href="<%=request.getContextPath()%>/ServletConnexion"><button>Retour</button></a>
 	
-	<button type="submit">Envoyer</button>
 	
 </body>
 </html>

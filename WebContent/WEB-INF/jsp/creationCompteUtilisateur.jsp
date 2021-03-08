@@ -56,12 +56,16 @@
 				<input class="champs" type="password" id="confirmationMotDePasse" name="confirmationMotDePasse"/>
 			</li>
 		</ul>
+		
+		<div type="button">
+			<button type="submit" value="submit">Créer</button>
+		</div>
 			
 	</form>
 
 	<a href="<%=request.getContextPath()%>/ServletConnexion"><button>Annuler</button></a>
 			
-	<button type="submit">Créer</button>
+	
 		
 
 </body>
