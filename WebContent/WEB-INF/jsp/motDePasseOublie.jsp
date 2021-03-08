@@ -11,8 +11,8 @@
 
 	<%@ include file="../html/entete.html" %>
 
-	<h1 style="text-align:center">Mot de passe oublié</h1>
-	<h3 style="text-align:center">Veuillez saisir votre email pour réinitialiser votre mot de passe</h3>
+	<h1>Mot de passe oublié</h1>
+	<p>Veuillez saisir votre email pour réinitialiser votre mot de passe</p>
 	
 	<form>
 		<input class="champsMdp" type="email" id="email" name="email"/>

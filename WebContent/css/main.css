@@ -6,6 +6,13 @@ body{
 	text-align:center;
 }
 
+.logo{
+	width:200px;
+	display:flex;
+	text-align:left;
+	margin:10px;
+}
+
 h1{
 	font-weight:bold;
 }
@@ -22,6 +29,10 @@ label{
 	margin-left:auto;
 }
 
+.txtLabel{
+	font-weight:bold;
+}
+
 .champs{
 	width:200px;
 	line-height:20px;
@@ -35,7 +46,9 @@ label{
 	border:1px solid #222;
 }
 
-
+.mdpOublie{
+	color:#779364;
+}
 
 button{
 	width:160px;

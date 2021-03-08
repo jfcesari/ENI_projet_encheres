@@ -14,11 +14,11 @@
 	<form action="<%=request.getContextPath()%>/ServletConnection" method="post"> <!-- Mettre dans action le chemin de la page vers laquelle les infos seront envoyées -->
 		<ul>
 			<li>
-				<label for="identifiant">Identifiant :</label>
+				<label class="txtLabel" for="identifiant">Identifiant :</label>
 				<input class="champs" type="text" id="identifiant" name="identifiant"/> <!-- L'identifiant peut être le mail ou le pseudo -->
 			</li>
 			<li>
-				<label for="motDePasse">Mot de passe :</label>
+				<label class="txtLabel" for="motDePasse">Mot de passe :</label>
 				<input class="champs" type="password" id="motDePasse" name="motDePasse"/> <!-- Paramétrer le fait que le mdp apparaisse en * -->
 			</li>
 		</ul>
@@ -30,7 +30,7 @@
 			</label>
 		</div>
 	
-		<a href="<%=request.getContextPath()%>/ServletMotDePasseOublie">Mot de passe oublié</a> <!-- Dois renvoyer vers une servlet qui retrouvera l'utilisateur + envoie un mail -->
+		<a class="mdpOublie" href="<%=request.getContextPath()%>/ServletMotDePasseOublie">Mot de passe oublié</a> <!-- Dois renvoyer vers une servlet qui retrouvera l'utilisateur + envoie un mail -->
 
 	</form>
 
