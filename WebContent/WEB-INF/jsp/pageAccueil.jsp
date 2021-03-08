@@ -10,6 +10,7 @@
 <body>
 
 	<%@ include file="../html/entete.html" %>
+	<%@ include file="menuNavigation.jspf" %>
 
 	<h1 class="text-center">Enchères en cours</h1>
 

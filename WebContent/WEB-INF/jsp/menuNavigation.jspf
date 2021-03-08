@@ -1,0 +1,24 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<link rel="stylesheet" href="css/nav.css"/>
+
+<nav>
+	<a class="menu" href="">S'inscrire - Se connecter</a>
+</nav>
+
+
+
+<nav>
+	<a class="menu" href="">Enchères</a>
+	<a class="menu" href="">Vendre un article</a>
+	<a class="menu" href="">Mon profil</a>
+	<a class="menu" href="">Déconnexion</a>
+</nav>
+
+
+
+
+
+
+</body>
+</html>
