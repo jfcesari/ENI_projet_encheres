@@ -8,15 +8,16 @@
 </head>
 <body>
 
-	<%@ include file="/WEB-INF/html/entete.html" %>
+	<%@ include file="../html/entete.html" %>
 
 	<h1 style="text-align:center">Mot de passe oublié</h1>
-	<h2>Veuillez saisir votre email pour réinitialiser votre mot de passe</h2>
+	<h2 style="text-align:center">Veuillez saisir votre email pour réinitialiser votre mot de passe</h2>
 	
 	<form>
 		<input type="email" id="email" name="email"/>
-		
-		<button type="submit">Envoyer</button>
 	</form>
+	
+	<button type="submit">Envoyer</button>
+	
 </body>
 </html>
