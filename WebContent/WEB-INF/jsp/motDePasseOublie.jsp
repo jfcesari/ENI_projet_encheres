@@ -18,6 +18,8 @@
 		<input class="champsMdp" type="email" id="email" name="email"/>
 	</form>
 	
+	<a href="<%=request.getContextPath()%>/ServletConnexion"><button>Retour</button></a>
+	
 	<button type="submit">Envoyer</button>
 	
 </body>

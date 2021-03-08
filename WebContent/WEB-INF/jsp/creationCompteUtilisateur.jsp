@@ -11,7 +11,7 @@
 
 <%@ include file="../html/entete.html" %>
 
-	<h1>Mon profil</h1>
+	<h1>Créer mon profil</h1>
 	
 	<form action="<%=request.getContextPath()%>" method="post"> <!-- Mettre dans action le chemin de la page vers laquelle les infos seront envoyées -->
 		<ul>
@@ -57,11 +57,12 @@
 			</li>
 		</ul>
 			
-		<button type="submit">Créer</button>
-		
-		<button onclick="">Annuler</button> <!-- Dois renvoyer à la page d'accueil -->
-		
 	</form>
+
+	<a href="<%=request.getContextPath()%>/ServletConnexion"><button>Annuler</button></a>
+			
+	<button type="submit">Créer</button>
+		
 
 </body>
 </html>
