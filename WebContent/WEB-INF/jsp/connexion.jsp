@@ -11,16 +11,14 @@
 
 	<%@ include file="../html/entete.html" %>
 	
-	<h1>Se connecter</h1>
-	
-	<form action="<%=request.getContextPath()%>/ServletConnection" method="post"> <!-- Mettre dans action le chemin de la page vers laquelle les infos seront envoyées -->
+	<form action="<%=request.getContextPath()%>/ServletConnexion" method="post"> <!-- Mettre dans action le chemin de la page vers laquelle les infos seront envoyées -->
 		<ul>
 			<li>
-				<label class="txtLabel" for="identifiant">Identifiant :</label>
+				<label for="identifiant">Identifiant :</label>
 				<input class="champs" type="text" id="identifiant" name="identifiant"/> <!-- L'identifiant peut être le mail ou le pseudo -->
 			</li>
 			<li>
-				<label class="txtLabel" for="motDePasse">Mot de passe :</label>
+				<label for="motDePasse">Mot de passe :</label>
 				<input class="champs" type="password" id="motDePasse" name="motDePasse"/> <!-- Paramétrer le fait que le mdp apparaisse en * -->
 			</li>
 		</ul>
@@ -32,11 +30,12 @@
 			</label>
 		</div>
 	
-		<a class="mdpOublie" href="<%=request.getContextPath()%>/ServletMotDePasseOublie">Mot de passe oublié</a> <!-- Dois renvoyer vers une servlet qui retrouvera l'utilisateur + envoie un mail -->
-
+		<a href="<%=request.getContextPath()%>/ServletMotDePasseOublie">Mot de passe oublié</a> <!-- Dois renvoyer vers une servlet qui retrouvera l'utilisateur + envoie un mail -->
+		
+		<button type="submit" value="submit">Connexion</button>	
 	</form>
 
-<button type="submit">Connexion</button>	
+
 	
 	<div class="button">
 		<a href="<%=request.getContextPath()%>/ServletCreationUtilisateur"><button>Créer un compte</button></a> <!-- Ajouter le lien vers la page de création du compte utilisateur -->

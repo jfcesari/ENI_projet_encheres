@@ -35,7 +35,7 @@ public class ServletConnexion extends HttpServlet {
             if (session.getAttribute("uriAndParamsRequested") != null) {
                 response.sendRedirect((String) session.getAttribute("uriAndParamsRequested"));
             } else {
-                response.sendRedirect(request.getContextPath());
+                response.sendRedirect("WEB-INF/jsp/pageAccueil.jsp");
             }
 
         } else {
@@ -50,7 +50,7 @@ public class ServletConnexion extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/jsp/connexion.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/jsp/pageAccueil.jsp");
         if (request.getRequestURI().contains("error")) {
             // display errors
             request.setAttribute("page", "login");
@@ -59,6 +59,7 @@ public class ServletConnexion extends HttpServlet {
         } else if (request.isUserInRole("basic_user")) {
             // authentication sucess !
             GestionSession.setSessionConnected(request);
+            response.sendRedirect("WEB-INF/jsp/pageAccueil.jsp");
             try {
                 // Set the user informations in the session in order to display them everywhere
                 GestionSession.setUtilisateurSessionBean(request, request.getUserPrincipal().getName());
@@ -66,7 +67,7 @@ public class ServletConnexion extends HttpServlet {
                 // This is serious
                 response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
             }
-            response.sendRedirect(request.getContextPath());
+            response.sendRedirect("WEB-INF/jsp/pageAccueil.jsp");
         }
     }
 }
