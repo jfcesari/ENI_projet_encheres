@@ -2,22 +2,27 @@
     pageEncoding="UTF-8"%>
 <link rel="stylesheet" href="css/nav.css"/>
 
-<nav>
-	<a class="menu" href="">S'inscrire - Se connecter</a>
-</nav>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 
+<c:choose>
 
-<nav>
-	<a class="menu" href="">Enchères</a>
-	<a class="menu" href="">Vendre un article</a>
-	<a class="menu" href="">Mon profil</a>
-	<a class="menu" href="">Déconnexion</a>
-</nav>
-
-
-
-
+	<c:when test="${isConnected}">
+		<nav>
+			<a class="menu" href="">Enchères</a>
+			<a class="menu" href="">Vendre un article</a>
+			<a class="menu" href="">Mon profil</a>
+			<a class="menu" href="">Déconnexion</a>
+		</nav>
+	</c:when>
+	
+	<c:otherwise>
+		<nav>
+			<a class="menu" href="<%=request.getContextPath()%>/ServletConnexion">S'inscrire - Se connecter</a>
+		</nav>
+	</c:otherwise>
+	
+</c:choose>
 
 
 </body>
