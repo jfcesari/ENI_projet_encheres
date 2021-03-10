@@ -16,7 +16,7 @@ import fr.eni.enchere.dal.jdbc.DALException;
 /**
  * Servlet implementation class ServletConnexion
  */
-@WebServlet("/ServletConnexion")
+@WebServlet(urlPatterns = {"/ServletConnexion", "/login_error", "/j_security_check"})
 public class ServletConnexion extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     
@@ -46,9 +46,6 @@ public class ServletConnexion extends HttpServlet {
         }
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/jsp/pageAccueil.jsp");
         if (request.getRequestURI().contains("error")) {
