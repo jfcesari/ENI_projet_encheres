@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,7 +13,7 @@
 	<%@ include file="../html/entete.html" %>
 	<%@ include file="menuNavigation.jspf" %>
 
-	<h1 class="text-center">Enchères en cours</h1>
+	<h1>Enchères en cours</h1>
 
 	<section class="filtre">
 	<form action="<%=request.getContextPath()%>/ServletAccueil" method="post">
@@ -32,9 +33,68 @@
 				<button class="btnRecherche" type="submit">Rechercher</button>
 			</li>
 		</ul>
+		</form>
+		
+		
+		<form action="<%=request.getContextPath()%>/ServletAccueil" method="post">
+			<div>
+				<input type="radio" id="achats" name="filtre" value="1"/>
+				<label class="txtLabel" for="achats">Achats</label>
+			
+				<ul>
+					<li>
+						<label class="txtCheckbox" for="filtreCheckbox">
+						<input type="checkbox" id="encheresEnCours" value="1" disabled="disabled"/>
+						Enchères en cours</label>
+					</li>
+					
+					<li>
+						<label class="txtCheckbox" for="filtreCheckbox">
+						<input type="checkbox" id="encheresEnCours" value="2"/>
+						Mes enchères en cours</label>
+					</li>
+					
+					<li>
+						<label class="txtCheckbox" for="filtreCheckbox">
+						<input type="checkbox" id="encheresEnCours" value="3"/>
+						Mes enchères remportées</label>
+					</li>
+				</ul>
+			</div>
+			
+			<div>
+				<input type="radio" id="ventes" name="filtre" value="2"/>
+				<label class="txtLabel" for="ventes">Mes ventes</label>
+			
+				<ul>
+					<li>
+						<label class="txtCheckbox" for="filtreCheckbox">
+						<input type="checkbox" id="encheresEnCours" value="1"/>
+						Mes ventes en cours</label>
+					</li>
+					
+					<li>
+						<label class="txtCheckbox" for="filtreCheckbox">
+						<input type="checkbox" id="encheresEnCours" value="2"/>
+						Enchères non débutées</label>
+					</li>
+					
+					<li>
+						<label class="txtCheckbox" for="filtreCheckbox">
+						<input type="checkbox" id="encheresEnCours" value="3"/>
+						Ventes terminées</label>
+					</li>
+				</ul>
+			</div>
+			
+			
+	
+		<!--<c:if test="${isConnected}">-->	
+			
+		<!--</c:if>-->
+		
 	</form>
 	</section>
-	
 	
 	
 </body>

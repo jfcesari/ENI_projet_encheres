@@ -37,6 +37,12 @@ label{
 	font-weight:bold;
 }
 
+.txtCheckbox{
+	display:block;
+	text-align:left;
+	font-size:0.8em;
+}
+
 .champs{
 	width:200px;
 	line-height:20px;
@@ -103,7 +109,6 @@ button:hover{
 	line-height:20px;
 	font-size:0.6em;
 }
-
 
 
 
