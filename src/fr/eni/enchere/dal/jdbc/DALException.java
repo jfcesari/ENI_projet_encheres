@@ -39,5 +39,10 @@ public class DALException extends Exception {
     {
         return this.getListErrorCodes();
     }
+
+	public void addError(int errorSelect) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 }

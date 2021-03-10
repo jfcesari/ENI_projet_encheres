@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 import fr.eni.enchere.bo.Utilisateur;
+import fr.eni.enchere.dal.DALErrors;
 //import fr.eni.enchere.dal.jdbc.UtilisateurDAO;
 import fr.eni.enchere.dal.UtilisateurDAO;
 
@@ -17,6 +18,8 @@ private static final String sqlUserUpdate = "UPDATE utilisateurs SET pseudo=?, n
 private static final String sqlUserInsert = "INSERT into utilisateurs (pseudo,nom,prenom,email,telephone,rue,code_postal,ville,mot_de_passe,credit,administrateur) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
 private static final String sqlUserDelete = "no_utilisateur=?";
 private static final String sqlUserSelectbyPseudo = "SELECT * FROM utilisateurs WHERE pseudo=?";
+private static final String sqlUniquePseudo = "SELECT * FROM utilisateurs WHERE pseudo LIKE ?";
+private static final String sqlUniqueEmail = "SELECT * FROM utilisateurs WHERE email LIKE ?;";
 	
 	@Override
 	public Utilisateur selectById(int id) throws DALException {
@@ -31,22 +34,13 @@ private static final String sqlUserSelectbyPseudo = "SELECT * FROM utilisateurs 
 			cnx.close();
 			
 		utilisateur=new Utilisateur(rs.getInt("no_utilisateur"), rs.getString("pseudo"), rs.getString("nom"), rs.getString("prenom"), rs.getString("email"), rs.getString("telephone"),  rs.getString("rue"),  rs.getString("code_postal"),  rs.getString("ville"), rs.getString("mot_de_passe"), rs.getInt("credit"), rs.getBoolean("administrateur"));
+		cnx.close();
 		} catch (SQLException e) {
-			throw new DALException("Request failed for id "+id, e);
-		} finally {
-			try {
-				rs.close();
-			} catch (SQLException e1) {
-				e1.printStackTrace();
+			e.printStackTrace();
+            DALException dalException = new DALException();
+            dalException.addError(DALErrors.error_insert);
+            throw dalException;
 			}
-			try {
-				if(ps != null) {
-					ps.close();
-				}
-			} catch (SQLException e){
-				e.printStackTrace();
-			}
-		}
 		return utilisateur;
 	}
 	
@@ -63,22 +57,13 @@ private static final String sqlUserSelectbyPseudo = "SELECT * FROM utilisateurs 
 		cnx.close();
 		
 	utilisateur=new Utilisateur(rs.getInt("no_utilisateur"), rs.getString("pseudo"), rs.getString("nom"), rs.getString("prenom"), rs.getString("email"), rs.getString("telephone"),  rs.getString("rue"),  rs.getString("code_postal"),  rs.getString("ville"), rs.getString("mot_de_passe"), rs.getInt("credit"), rs.getBoolean("administrateur"));
+	cnx.close();
 	} catch (SQLException e) {
-		throw new DALException("Request failed for user "+pseudo_utilisateur, e);
-	} finally {
-		try {
-			rs.close();
-		} catch (SQLException e1) {
-			e1.printStackTrace();
-		}
-		try {
-			if(ps != null) {
-				ps.close();
-			}
-		} catch (SQLException e){
 			e.printStackTrace();
-		}
-	}
+            DALException dalException = new DALException();
+            dalException.addError(DALErrors.error_select);
+            throw dalException;
+            }
 	return utilisateur;
 }
 	
@@ -88,7 +73,6 @@ private static final String sqlUserSelectbyPseudo = "SELECT * FROM utilisateurs 
 		PreparedStatement ps=null;
 		try {
 			ps=cnx.prepareStatement(sqlUserUpdate);
-		
 			ps.setString(1, usr.getPseudo());
 			ps.setString(2, usr.getNom());
 			ps.setString(3, usr.getPrenom());
@@ -100,20 +84,14 @@ private static final String sqlUserSelectbyPseudo = "SELECT * FROM utilisateurs 
 			ps.setString(9, usr.getMotDePasse());
 			ps.setInt(10, usr.getCredit());
 			ps.setBoolean(11, usr.getAdministrateur());
-
 			ps.executeUpdate();
-			cnx.close();
-		} catch (SQLException e){
-			throw new DALException("Update failed ", e);
-		} finally {
-			try {
-				if (ps!=null) {
-					ps.close();
-				}
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		}
+            cnx.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            DALException dalException = new DALException();
+            dalException.addError(DALErrors.error_update);
+            throw dalException;
+        }
 	}
 
 	@Override
@@ -140,26 +118,15 @@ private static final String sqlUserSelectbyPseudo = "SELECT * FROM utilisateurs 
 			if (keys.next()) {
 				int id=keys.getInt(1);
 				usr.setNoUtilisateur(id);
-			} else {
-				throw new DALException ("Error while retrieving id.");
-			}	
-			cnx.close();
-		} catch (SQLException e) {
-			throw new DALException("Insertion failed", e);
-		} finally {
-			try {
-				keys.close();
-			} catch (SQLException e1) {
-				e1.printStackTrace();
-			}
-			try {
-				if(ps != null) {
-					ps.close();
 				}
-			} catch (SQLException e){
+			cnx.close();
+				}
+				catch (SQLException e) {
 				e.printStackTrace();
-			}
-		}
+		        DALException dalException = new DALException();
+		        dalException.addError(DALErrors.error_insert);
+		        throw dalException;
+				}    
 	}
 
 	@Override
@@ -170,35 +137,75 @@ private static final String sqlUserSelectbyPseudo = "SELECT * FROM utilisateurs 
 			ps=cnx.prepareStatement(sqlUserDelete);
 			ps.setString(1,"no_utilisateur");
 			ps.executeUpdate();
-		} catch (SQLException e) {
-			throw new DALException("Deletion failed for id=" + id, e);
-		} finally {
-			try {
-				if (ps != null) {
-					ps.close();
-				}
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-			cnx.close();
-		}
+            cnx.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            DALException dalException = new DALException();
+            dalException.addError(DALErrors.error_delete);
+            throw dalException;
+        }
 	}
 
 	@Override
-	public void delete(Utilisateur id) throws DALException {
-	// TODO Auto-generated method stub
-	
+	public void delete(Utilisateur utilisateur) throws DALException {
+	    Connection cnx = JdbcTools.connect();
+        try {
+            PreparedStatement ps = cnx.prepareStatement(sqlUserDelete);
+            ps.setInt(1, utilisateur.getNoUtilisateur());
+            ps.setString(2,  utilisateur.getPseudo());
+            ps.executeUpdate();
+            cnx.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            DALException dalException = new DALException();
+            dalException.addError(DALErrors.error_delete);
+            throw dalException;
+        }
 	}
 
 	@Override
-	public boolean checkForUniquePseudo(String pseudo) {
-	// TODO Auto-generated method stub
-	return false;
+	public boolean checkForUniquePseudo(String pseudo) throws DALException {
+		Connection cnx = JdbcTools.connect();
+        boolean isUnique = true;
+        try {
+            PreparedStatement stmt = cnx.prepareStatement(sqlUniquePseudo);
+            stmt.setString(1, pseudo);
+            stmt.setString(2, pseudo);
+            stmt.execute();
+            ResultSet rs = stmt.getResultSet();
+            if (rs.next()) {
+                isUnique = false;
+            }
+            cnx.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            DALException dalException = new DALException();
+            dalException.addError(DALErrors.error_select);
+            throw dalException;
+        }
+        return isUnique;
 	}
 
 	@Override
-	public boolean checkForUniqueEmail(String email) {
-	// TODO Auto-generated method stub
-	return false;
+	public boolean checkForUniqueEmail(String email) throws DALException {
+		Connection cnx = JdbcTools.connect();
+        boolean isUnique = true;
+        try {
+            PreparedStatement stmt = cnx.prepareStatement(sqlUniqueEmail);
+            stmt.setString(1, email);
+            stmt.setString(2, email);
+            stmt.execute();
+            ResultSet rs = stmt.getResultSet();
+            if (rs.next()) {
+                isUnique = false;
+            }
+            cnx.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            DALException dalException = new DALException();
+            dalException.addError(DALErrors.error_select);
+            throw dalException;
+        }
+        return isUnique;
 	}
 }

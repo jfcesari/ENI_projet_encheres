@@ -24,9 +24,9 @@ public interface UtilisateurDAO {
 		
 		public void delete(int id) throws DALException, SQLException;
 
-		public boolean checkForUniquePseudo(String pseudo);
+		public boolean checkForUniquePseudo(String pseudo) throws DALException;
 
-		public boolean checkForUniqueEmail(String email);
+		public boolean checkForUniqueEmail(String email) throws DALException;
 
 		public Utilisateur selectByPseudo(String pseudo_utilisateur) throws DALException;
 

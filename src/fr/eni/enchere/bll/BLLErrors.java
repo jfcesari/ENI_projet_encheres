@@ -11,4 +11,13 @@ public class BLLErrors {
 	static final int length_rue = 30007;
 	static final int length_codepostal = 30008;
 	static final int length_ville = 30009;
+	static final int no_result = 30010;
+	static final int length_art_name = 30011;
+	static final int length_art_description = 30012;
+	static final int error_status = 30013;
+	static final int error_end_date = 30014;
+	static final int error_beginning_date = 30015;
+	static final int length_libelle = 30016;
+	static final int libelle_taken = 30017;
+	
 }
