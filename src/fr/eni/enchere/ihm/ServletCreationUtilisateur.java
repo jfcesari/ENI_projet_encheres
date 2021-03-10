@@ -19,7 +19,7 @@ import fr.eni.enchere.dal.jdbc.DALException;
 /**
  * Servlet implementation class ServletCreationUtilisateur
  */
-@WebServlet("/jsp/ServletCreationUtilisateur")
+@WebServlet("/ServletCreationUtilisateur")
 public class ServletCreationUtilisateur extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -47,8 +47,8 @@ public class ServletCreationUtilisateur extends HttpServlet {
 		}
         List<String> errors = new ArrayList<>();
         // Hash password
-        String password = request.getParameter("password");
-        String generatedPassword = GestionMotDePasse.hashPassword(password);
+       // String password = request.getParameter("password");
+       // String generatedPassword = GestionMotDePasse.hashPassword(password);
         // New user
         Utilisateur utilisateur = new Utilisateur(
                 request.getParameter("pseudo"),
@@ -59,11 +59,11 @@ public class ServletCreationUtilisateur extends HttpServlet {
                 request.getParameter("rue"),
                 request.getParameter("codePostal"),
                 request.getParameter("ville"),
-                generatedPassword,
+                request.getParameter("motDePasse"),
                 0,
                 false
         );
-        RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/index.jsp");
+        RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/connexion.jsp");
         try {
             um.insertUtilisateur(utilisateur);
         } catch (BLLException e) {

@@ -4,63 +4,69 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="css/main.css"/>
 <title>Création de compte</title>
 </head>
 <body>
 
 <%@ include file="../html/entete.html" %>
 
-	<h1>Mon profil</h1>
+	<h1>Créer mon profil</h1>
 	
-	<form action="<%=request.getContextPath()%>" method="post"> <!-- Mettre dans action le chemin de la page vers laquelle les infos seront envoyées -->
+	<form action="<%=request.getContextPath()%>/ServletCreationUtilisateur" method="post"> <!-- Mettre dans action le chemin de la page vers laquelle les infos seront envoyées -->
 		<ul>
 			<li>
-				<label for="pseudo">Pseudo :</label>
-				<input type="text" id="pseudo" name="pseudo"/>
+				<label class="txtLabel" for="pseudo">Pseudo :</label>
+				<input class="champs" type="text" id="pseudo" name="pseudo"/>
 			</li>
 			<li>
-				<label for="nom">Nom :</label>
-				<input type="text" id="nom" name="nom"/>
+				<label class="txtLabel" for="nom">Nom :</label>
+				<input class="champs" type="text" id="nom" name="nom"/>
 			</li>
 			<li>
-				<label for="prenom">Prénom :</label>
-				<input type="text" id="prenom" name="prenom"/>
+				<label class="txtLabel" for="prenom">Prénom :</label>
+				<input class="champs" type="text" id="prenom" name="prenom"/>
 			</li>
 			<li>
-				<label for="email">Email :</label>
-				<input type="email" id="email" name="email"/>
+				<label class="txtLabel" for="email">Email :</label>
+				<input class="champs" type="email" id="email" name="email"/>
 			</li>
 			<li>
-				<label for="telephone">Téléphone :</label>
-				<input type="text" id="telephone" name="telephone"/>
+				<label class="txtLabel" for="telephone">Téléphone :</label>
+				<input class="champs" type="text" id="telephone" name="telephone"/>
 			</li>
 			<li>
-				<label for="rue">Rue :</label>
-				<input type="text" id="rue" name="rue"/>
+				<label class="txtLabel" for="rue">Rue :</label>
+				<input class="champs" type="text" id="rue" name="rue"/>
 			</li>
 			<li>
-				<label for="codePostal">Code postal :</label>
-				<input type="text" id="codePostal" name="codePostal"/>
+				<label class="txtLabel" for="codePostal">Code postal :</label>
+				<input class="champs" type="text" id="codePostal" name="codePostal"/>
 			</li>
 			<li>
-				<label for="ville">Ville :</label>
-				<input type="text" id="ville" name="ville"/>
+				<label class="txtLabel" for="ville">Ville :</label>
+				<input class="champs" type="text" id="ville" name="ville"/>
 			</li>
 			<li>
-				<label for="motDePasse">Mot de passe :</label>
-				<input type="text" id="motDePasse" name="motDePasse"/>
+				<label class="txtLabel" for="motDePasse">Mot de passe :</label>
+				<input class="champs" type="password" id="motDePasse" name="motDePasse"/>
 			</li>
 			<li>
-				<label for="confirmationMotDePasse">Confirmation :</label>
-				<input type="text" id="confirmationMotDePasse" name="confirmationMotDePasse"/>
+				<label class="txtLabel" for="confirmationMotDePasse">Confirmation :</label>
+				<input class="champs" type="password" id="confirmationMotDePasse" name="confirmationMotDePasse"/>
 			</li>
 		</ul>
+		
+		<div type="button">
+			<button type="submit" value="submit">Créer</button>
+		</div>
 			
-		<button type="submit">Créer</button>
-		
-		<button onclick="">Annuler</button> <!-- Dois renvoyer à la page d'accueil -->
-		
 	</form>
+
+	<a href="<%=request.getContextPath()%>/ServletConnexion"><button>Annuler</button></a>
+			
+	
+		
 
 </body>
 </html>

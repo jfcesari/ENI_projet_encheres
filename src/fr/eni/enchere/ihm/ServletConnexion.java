@@ -16,31 +16,23 @@ import fr.eni.enchere.dal.jdbc.DALException;
 /**
  * Servlet implementation class ServletConnexion
  */
-@WebServlet("/ServletConnexion")
+@WebServlet(urlPatterns = {"/ServletConnexion", "/login_error", "/j_security_check"})
 public class ServletConnexion extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public ServletConnexion() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
-
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
+    
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		if (request.isUserInRole("basic_user")) {
-            GestionSession.setSessionConnected(request);
+			GestionSession.setSessionConnected(request);
             try {
                 // Set the user informations in the session in order to display them everywhere
                 GestionSession.setUtilisateurSessionBean(request, request.getUserPrincipal().getName());
-            } catch (DALException | BLLException e) {
+            } catch (DALException e) {
                 // This is serious
                 response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-            }
+            } catch (BLLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
             HttpSession session = request.getSession();
             // If there is this session attribute, we redirect to it
             if (session.getAttribute("uriAndParamsRequested") != null) {
@@ -55,11 +47,8 @@ public class ServletConnexion extends HttpServlet {
             RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/jsp/connexion.jsp");
             rd.forward(request, response);
         }
-	}
+    }
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/jsp/connexion.jsp");
         if (request.getRequestURI().contains("error")) {
@@ -72,11 +61,14 @@ public class ServletConnexion extends HttpServlet {
             GestionSession.setSessionConnected(request);
             try {
                 // Set the user informations in the session in order to display them everywhere
-                GestionSession.setUtilisateurSessionBean(request, request.getUserPrincipal().getName());
-            } catch (DALException | BLLException e) {
+            	GestionSession.setUtilisateurSessionBean(request, request.getUserPrincipal().getName());
+            } catch (DALException e) {
                 // This is serious
                 response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-            }
+            } catch (BLLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
             response.sendRedirect(request.getContextPath());
         }
     }
