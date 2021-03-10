@@ -38,13 +38,13 @@
 		
 		<form action="<%=request.getContextPath()%>/ServletAccueil" method="post">
 			<div>
-				<input type="radio" id="achats" name="filtre" value="1"/>
+				<input type="radio" id="achats" name="filtre" value="1"  disabled="disable()"/>
 				<label class="txtLabel" for="achats">Achats</label>
 			
 				<ul>
 					<li>
 						<label class="txtCheckbox" for="filtreCheckbox">
-						<input type="checkbox" id="encheresEnCours" value="1" disabled="disabled"/>
+						<input type="checkbox" id="encheresEnCours" value="1"/>
 						Enchères en cours</label>
 					</li>
 					
@@ -69,7 +69,7 @@
 				<ul>
 					<li>
 						<label class="txtCheckbox" for="filtreCheckbox">
-						<input type="checkbox" id="encheresEnCours" value="1"/>
+						<input type="checkbox" id="ventesEnCours" value="1"/>
 						Mes ventes en cours</label>
 					</li>
 					
@@ -87,6 +87,11 @@
 				</ul>
 			</div>
 			
+			<script>
+				function disable() {
+  					document.getElementById("ventesEnCours").disabled = true;
+				}
+			</script>
 			
 	
 		<!--<c:if test="${isConnected}">-->	
