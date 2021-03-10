@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,7 +14,7 @@
 	
 	<h1>Se connecter</h1>
 	
-	<form action="<%=request.getContextPath()%>/ServletConnexion" method="post"> <!-- Mettre dans action le chemin de la page vers laquelle les infos seront envoyées -->
+	<form action="<%=request.getContextPath()%>/ServletConnexion" method="post" action="j_security_check"> <!-- Mettre dans action le chemin de la page vers laquelle les infos seront envoyées -->
 		<ul>
 			<li>
 				<label class="txtLabel" for="identifiant">Identifiant :</label>
@@ -21,10 +22,13 @@
 			</li>
 			<li>
 				<label class="txtLabel" for="motDePasse">Mot de passe :</label>
-				<input class="champs" type="password" id="motDePasse" name="motDePasse"/> <!-- Paramétrer le fait que le mdp apparaisse en * -->
+				<input class="champs" type="password" id="motDePasse" name="motDePasse" placeholder="Mot de passe"> <!-- Paramétrer le fait que le mdp apparaisse en * -->
 			</li>
 		</ul>
-			
+		<%--@elvariable id="login_error" type="boolean"--%>
+    	<c:if test="${login_error}">
+            <p class="text-danger text-center">Identifiant ou mot de passe incorrect</p>
+    	</c:if>
 		<div class="checkbox">
 			<label for="souvenirUtilisateur">
 				<input type="checkbox" id="souvenirUtilisateur" name="souvenirUtilisateur" value="1"/> <!-- Quelle valeur attribuer ? Si nb récup =1, on enregistre, si non, on enregistre pas ? -->
