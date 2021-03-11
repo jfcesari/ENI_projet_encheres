@@ -85,7 +85,7 @@ private static final String SqlDelete = "DELETE FROM articles_vendus WHERE no_ar
 	            ps.execute();
 	            ResultSet rs = ps.getResultSet();
 	            while (rs.next()) {
-	                articlesVendus.add(rs.getInt("noArticle"), rs.getString("nomArticle"),  rs.getInt("noCategorie"), rs.getString("description"), rs.getDate("dateDebutEncheres"), rs.getDate("dateFinEncheres"),  rs.getInt("miseAPrix"),  rs.getInt("PrixVente"),  rs.getString("etatVente"));				
+	                articlesVendus.add(new ArticleVendu(rs.getInt("noArticle"), rs.getString("nomArticle"),  rs.getInt("noCategorie"), rs.getString("description"), rs.getDate("dateDebutEncheres"), rs.getDate("dateFinEncheres"),  rs.getInt("miseAPrix"),  rs.getInt("PrixVente"),  rs.getString("etatVente")));				
 				}
 	            cnx.close();
 	        } catch (SQLException e) {
@@ -109,7 +109,7 @@ private static final String SqlDelete = "DELETE FROM articles_vendus WHERE no_ar
 				rs=ps.executeQuery();
 				cnx.close();
 				while (rs.next()) {
-	                articlesVendus.add(rs.getInt("noArticle"), rs.getString("nomArticle"), rs.getInt("noCategorie"), rs.getString("description"), rs.getDate("dateDebutEncheres"), rs.getDate("dateFinEncheres"),  rs.getInt("miseAPrix"),  rs.getInt("PrixVente"),  rs.getString("etatVente"));				
+	                articlesVendus.add(new ArticleVendu(rs.getInt("noArticle"), rs.getString("nomArticle"), rs.getInt("noCategorie"), rs.getString("description"), rs.getDate("dateDebutEncheres"), rs.getDate("dateFinEncheres"),  rs.getInt("miseAPrix"),  rs.getInt("PrixVente"),  rs.getString("etatVente")));				
 				}
 	            cnx.close();
 	        } catch (SQLException e) {
@@ -175,7 +175,7 @@ private static final String SqlDelete = "DELETE FROM articles_vendus WHERE no_ar
 	            ps.execute();
 	            ResultSet rs = ps.getResultSet();
 	            while(rs.next()) {
-	            	 articlesVendus.add(rs.getInt("noArticle"), rs.getString("nomArticle"), rs.getInt("noCategorie"), rs.getString("description"), rs.getDate("dateDebutEncheres"), rs.getDate("dateFinEncheres"),  rs.getInt("miseAPrix"),  rs.getInt("PrixVente"),  rs.getString("etatVente"));				
+	            	 articlesVendus.add(new ArticleVendu(rs.getInt("noArticle"), rs.getString("nomArticle"), rs.getInt("noCategorie"), rs.getString("description"), rs.getDate("dateDebutEncheres"), rs.getDate("dateFinEncheres"),  rs.getInt("miseAPrix"),  rs.getInt("PrixVente"),  rs.getString("etatVente")));				
 				}
 	            cnx.close();
 	        } catch (SQLException e) {

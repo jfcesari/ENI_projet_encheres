@@ -73,10 +73,7 @@ private static final String SqlCatCheckIfUnique = "SELECT * FROM categories WHER
             ps.execute(SqlCatSelectAll);
             ResultSet rs = ps.getResultSet();
             while (rs.next()) {
-                categories.add(new Categorie(
-                        rs.getInt("no_categorie"),
-                        rs.getString("libelle")
-                ));
+                categories.add(new Categorie(rs.getInt("no_categorie"), rs.getString("libelle")));
             }
             cnx.close();
         } catch (SQLException e) {

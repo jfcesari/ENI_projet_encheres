@@ -11,5 +11,4 @@ public interface EnchereDAO {
 	void insert(Enchere enchere) throws DALException;
 
 	List<Integer> getNoArticlesByUtilisateurAndEtat(Utilisateur utilisateur, String state) throws DALException;
-
 }

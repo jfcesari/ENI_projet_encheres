@@ -65,12 +65,12 @@ private static final String SqlWdwlDelete = "DELETE FROM retraits WHERE no_artic
     public void update(Retrait retrait) throws DALException {
         Connection cnx = JdbcTools.connect();
         try {
-            PreparedStatement stmt = cnx.prepareStatement(SqlWdwlUpdate);
-            stmt.setString(1, retrait.getRue());
-            stmt.setString(2, retrait.getCodePostal());
-            stmt.setString(3, retrait.getVille());
-            stmt.setInt(4, retrait.getNoArticle());
-            stmt.executeUpdate();
+            PreparedStatement ps = cnx.prepareStatement(SqlWdwlUpdate);
+            ps.setString(1, retrait.getRue());
+            ps.setString(2, retrait.getCodePostal());
+            ps.setString(3, retrait.getVille());
+            ps.setInt(4, retrait.getNoArticle());
+            ps.executeUpdate();
             cnx.close();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -84,9 +84,9 @@ private static final String SqlWdwlDelete = "DELETE FROM retraits WHERE no_artic
     public void delete(Retrait retrait) throws DALException {
         Connection cnx = JdbcTools.connect();
         try {
-            PreparedStatement stmt = cnx.prepareStatement(SqlWdwlDelete);
-            stmt.setInt(1, retrait.getNoArticle());
-            stmt.executeUpdate();
+            PreparedStatement ps = cnx.prepareStatement(SqlWdwlDelete);
+            ps.setInt(1, retrait.getNoArticle());
+            ps.executeUpdate();
             cnx.close();
         } catch (SQLException e) {
             e.printStackTrace();
