@@ -62,7 +62,15 @@
 		</div>
 			
 	</form>
-
+	<script type="text/javascript">
+    $("#form_creation_login").on("submit", function(e) {
+        if ($("#password").val() !== $("#confirm_password").val()) {
+            e.preventDefault();
+            var passwordNotMatchWarning = $('<p class="mx-auto text-danger">Les mots de passe ne correspondent pas</p>');
+            $("#password_block").append(passwordNotMatchWarning);
+        }
+    });
+	</script>
 	<a href="<%=request.getContextPath()%>/ServletConnexion"><button>Annuler</button></a>
 			
 	

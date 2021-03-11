@@ -22,69 +22,71 @@ import fr.eni.enchere.dal.jdbc.DALException;
 @WebServlet("/ServletCreationUtilisateur")
 public class ServletCreationUtilisateur extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
+       
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/creationCompteUtilisateur.jsp");
-        request.setAttribute("page", "createLogin");
-        rd.forward(request, response);
-    }
+		
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/connexion/CreationCompte.jsp");
+		
+		rd.forward(request, response);
+	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("UTF-8");
-        UtilisateurManager um= null;
+		
+		UtilisateurManager newUser = null;
 		try {
-			um = new UtilisateurManager();
+			newUser = new UtilisateurManager();
 		} catch (BLLException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-        List<String> errors = new ArrayList<>();
-        // Hash password
-       // String password = request.getParameter("password");
-       // String generatedPassword = GestionMotDePasse.hashPassword(password);
-        // New user
-        Utilisateur utilisateur = new Utilisateur(
-                request.getParameter("pseudo"),
-                request.getParameter("nom"),
-                request.getParameter("prenom"),
-                request.getParameter("email"),
-                request.getParameter("telephone"),
-                request.getParameter("rue"),
-                request.getParameter("codePostal"),
-                request.getParameter("ville"),
-                request.getParameter("motDePasse"),
-                0,
-                false
-        );
-        RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/connexion.jsp");
-        try {
-            um.insertUtilisateur(utilisateur);
-        } catch (BLLException e) {
-            GestionErreur.BLLExceptionsCatcher(e, errors, request);
-        } catch (DALException e) {
-            GestionErreur.DALExceptionsCatcher(e, errors, request);
-        }
-        if (errors.isEmpty()) {
-            try {
-                GestionRequete.processHomePageAttributes(request);
-            } catch (DALException e) {
-                GestionErreur.DALExceptionsCatcher(e, errors, request);
-            } catch (BLLException e) {
-                GestionErreur.BLLExceptionsCatcher(e, errors, request);
-            }
-            request.setAttribute("loginCreated", "true");
-            request.setAttribute("page", "home");
-        } else {
-            request.setAttribute("page", "createLogin");
-            request.setAttribute("utilisateurError", utilisateur);
-        }
-        rd.forward(request, response);
-    }
+		
+		String pseudo = null;
+		String nom = null;
+		String prenom = null;
+		String email = null;
+		String telephone = null;
+		String rue = null;
+		String codePostal = null;
+		String ville = null;
+		String motDePasse = null;
+		String confirmMotDePasse = null;
+		
+		pseudo = request.getParameter("pseudo").trim();
+		nom = request.getParameter("nom").trim();
+		prenom = request.getParameter("prenom").trim();
+		email = request.getParameter("email").trim();
+		telephone = request.getParameter("telephone");
+		rue = request.getParameter("rue").trim();
+		codePostal = request.getParameter("codePostal");
+		ville = request.getParameter("ville").trim();
+		motDePasse = request.getParameter("motDePasse").trim();
+		confirmMotDePasse = request.getParameter("confirmMotDePasse").trim();
+		
+		Utilisateur user = new Utilisateur(pseudo, nom, prenom, email, telephone, rue, codePostal, ville, motDePasse, 0, false); 
+		
+		try {
+			
+			newUser.insertUser(0, pseudo, nom, prenom, email, telephone, rue, codePostal, ville, confirmMotDePasse, 0, false);
+			
+			request.setAttribute("user", user);
+			
+			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/connexion/AcceuilConnecte.jsp");
+			rd.forward(request, response);
+			
+		}catch (Exception e) {
+			
+			//request.setAttribute("Erreur", e.getMessage());
+			request.getRequestDispatcher("/WEB-INF/connexion/CreationCompte.jsp");
+			
+		} 
+
+			
+	}
+
 }

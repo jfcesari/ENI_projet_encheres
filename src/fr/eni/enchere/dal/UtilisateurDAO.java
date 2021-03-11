@@ -1,6 +1,7 @@
 package fr.eni.enchere.dal;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import	fr.eni.enchere.bo.Utilisateur;
 //import	fr.eni.enchere.dal.jdbc.UtilisateursDAOJdbcImpl;
@@ -29,5 +30,13 @@ public interface UtilisateurDAO {
 		public boolean checkForUniqueEmail(String email) throws DALException;
 
 		public Utilisateur selectByPseudo(String pseudo_utilisateur) throws DALException;
+
+		Utilisateur selectLogin(String EmailouPseudo, String motDePasse);
+		
+		public ArrayList<String> selectAllEmail();
+
+		public ArrayList<String> selectAllPseudo();
+
+		public void insertUser(Utilisateur utilisateur);
 
 }

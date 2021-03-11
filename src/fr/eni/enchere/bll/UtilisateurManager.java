@@ -1,13 +1,18 @@
 package fr.eni.enchere.bll;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import fr.eni.enchere.bo.Utilisateur;
 import fr.eni.enchere.dal.DAOFactory;
 import fr.eni.enchere.dal.UtilisateurDAO;
 import fr.eni.enchere.dal.jdbc.DALException;
+import fr.eni.enchere.bll.BLLException;
 
 public class UtilisateurManager {
+	
+	private static UtilisateurManager instance;
+	
 	private static UtilisateurDAO daoUsr;
 
    public UtilisateurManager() throws BLLException {
@@ -24,6 +29,26 @@ public class UtilisateurManager {
         return daoUsr.selectByPseudo(pseudo_utilisateur);
 	}
     
+	public Utilisateur getUtilisateurLogin(String EmailouPseudo, String motDePasse) {
+		
+		Utilisateur utilisateur = null;
+		
+		
+		try {
+			
+		    utilisateur = daoUsr.selectLogin(EmailouPseudo, motDePasse);
+			
+		} catch (Exception e) {
+			
+			e.printStackTrace();
+			
+		}
+		
+		
+		return utilisateur;
+			
+	}
+	
     //CRUD: update
     public void updateUtilisateur (Utilisateur utilisateur, boolean checkForMail, boolean checkForPseudo) throws BLLException, DALException {
         BLLException bllException = validateUtilisateur(utilisateur);
@@ -61,6 +86,44 @@ public class UtilisateurManager {
         }
     }
 
+    public Utilisateur insertUser(int noUtilisateur, String pseudo, String nom, String prenom, String email, String telephone, String rue, String codePostal, String ville, String motDePasse, int credit, boolean administrateur) {
+		
+		Utilisateur utilisateur = new Utilisateur();
+	
+		utilisateur.setPseudo(pseudo);
+		utilisateur.setNom(nom);
+		utilisateur.setPrenom(prenom);
+		utilisateur.setEmail(email);
+		utilisateur.setTelephone(telephone);
+		utilisateur.setRue(rue);
+		utilisateur.setCodePostal(codePostal);
+		utilisateur.setVille(ville);
+		utilisateur.setMotDePasse(motDePasse);
+		utilisateur.setCredit(0);
+		utilisateur.setAdministrateur(false);
+		if(verifMail(email) == true && verifPseudo(pseudo) == true) {
+			this.daoUsr.insertUser(utilisateur); 
+			System.out.println("CPALAMERDE");
+			
+		}else {
+			System.out.println("CLAMERDE");
+		}
+		return utilisateur;
+		
+	}
+    
+	private boolean verifPseudo(String pseudo2) {
+		ArrayList<String> listPseudo = daoUsr.selectAllPseudo();
+		
+		for (String pseudo : listPseudo) {
+			
+			if(pseudo2.equals(pseudo)) return false;
+				
+		}
+		return true;
+		
+	}
+	
 	//CRUD: delete
     public void deleteUtilisateur (Utilisateur utilisateur) throws DALException, SQLException {
         try {
@@ -102,4 +165,17 @@ public class UtilisateurManager {
         return bllException;
     }
 
+    	public Boolean verifMail (String mail) {
+		
+		ArrayList<String> listMail = daoUsr.selectAllEmail();
+		
+		for (String email : listMail) {
+			
+			if(mail.equals(email)) return false;
+				
+		}
+		
+		return true;
+		
+	}
 }
