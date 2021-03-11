@@ -49,4 +49,5 @@ public class Retrait {
 		String s = String.format("Lieu de retrait : %s, %s %s%n", getRue(), getCodePostal(), getVille());
 		return s;
 	}
+
 }

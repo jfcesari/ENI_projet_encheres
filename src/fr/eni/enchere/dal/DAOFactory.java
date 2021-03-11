@@ -3,6 +3,7 @@ package fr.eni.enchere.dal;
 import fr.eni.enchere.dal.jdbc.ArticleVenduDAOJdbcImpl;
 import fr.eni.enchere.dal.jdbc.CategorieDAOJdbcImpl;
 import fr.eni.enchere.dal.jdbc.EnchereDAOJdbcImpl;
+import fr.eni.enchere.dal.jdbc.RetraitDAOJdbcImpl;
 import fr.eni.enchere.dal.jdbc.UtilisateursDAOJdbcImpl;
 
 public class DAOFactory {
@@ -20,5 +21,9 @@ public class DAOFactory {
   
     public static EnchereDAO getDAOEnchere() {
     	return new EnchereDAOJdbcImpl();
+	}
+
+	public static RetraitDAO getRetraitDAO() {
+		return new RetraitDAOJdbcImpl();
 	}
 }
