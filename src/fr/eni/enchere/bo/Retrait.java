@@ -3,6 +3,7 @@ package fr.eni.enchere.bo;
 public class Retrait {
 
 	//Attributs
+	private int noArticle;
 	private String rue;
 	private String codePostal;
 	private String ville;
@@ -48,6 +49,10 @@ public class Retrait {
 	public String toString() {
 		String s = String.format("Lieu de retrait : %s, %s %s%n", getRue(), getCodePostal(), getVille());
 		return s;
+	}
+
+	public int getNoArticle() {
+		return noArticle;
 	}
 
 }
