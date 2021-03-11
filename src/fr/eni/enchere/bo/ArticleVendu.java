@@ -135,10 +135,10 @@ public class ArticleVendu {
 		String s = new String();
 		if(lieuRetrait.toString().isEmpty()) {
 			s = String.format("Numéro de l'article : %d%n Nom de l'article : %s%n Catégorie de l'article : %s%n Description : %s%n Date début de l'enchère : %s%n Date fin de l'enchère : %s%n Mise à prix : %d%n Prix de vente : %d%n État de la vente : %s%n Lieu de retrait : %s%n", 
-			getNoArticle(), getNomArticle(), getCategorieArticle(), getDescription(), getDateDebutEncheres(), getDateFinEncheres(), getMiseAPrix(), getPrixVente(), getEtatVente(), getLieuRetrait());
+			getNoArticle(), getNomArticle(), getNoCategorie(), getDescription(), getDateDebutEncheres(), getDateFinEncheres(), getMiseAPrix(), getPrixVente(), getEtatVente(), getLieuRetrait());
 		} else {
 			s = String.format("Numéro de l'article : %d%n Nom de l'article : %s%n Catégorie de l'article : %s%n Description : %s%n Date début de l'enchère : %s%n Date fin de l'enchère : %s%n Mise à prix : %d%n Prix de vente : %d%n État de la vente : %s%n", 
-			getNoArticle(), getNomArticle(), getCategorieArticle(), getDescription(), getDateDebutEncheres(), getDateFinEncheres(), getMiseAPrix(), getPrixVente(), getEtatVente());	
+			getNoArticle(), getNomArticle(), getNoCategorie(), getDescription(), getDateDebutEncheres(), getDateFinEncheres(), getMiseAPrix(), getPrixVente(), getEtatVente());	
 		} return s;
 	}
 }
