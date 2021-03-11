@@ -3,7 +3,7 @@ package fr.eni.enchere.bo;
 public class Categorie {
 	
 	//Attributs
-	private int noCategorie;
+	private static int noCategorie;
 	private String libelle;
 	
 	//Constructeurs
@@ -17,7 +17,7 @@ public class Categorie {
 	}
 
 	//Getter et Setter
-	public int getNoCategorie() {
+	public static int getNoCategorie() {
 		return noCategorie;
 	}
 

@@ -105,7 +105,7 @@ private static final String SqlDelete = "DELETE FROM articles_vendus WHERE no_ar
 			List<ArticleVendu> articlesVendus = new ArrayList<>();
 			try {
 				ps=cnx.prepareStatement(SqlSoldArtSelectById);
-				ps.setInt(1, Categorie.getNoCategorie);
+				ps.setInt(1, Categorie.getNoCategorie());
 				rs=ps.executeQuery();
 				cnx.close();
 				while (rs.next()) {
