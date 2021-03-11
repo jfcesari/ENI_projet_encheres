@@ -13,6 +13,6 @@ public interface CategorieDAO {
 
 	List<Categorie> selectAll() throws DALException;
 
-	boolean checkForUniqueCategorieLibelle(String libelle);
+	boolean checkForUniqueCategorieLibelle(String libelle) throws DALException;
 
 }
