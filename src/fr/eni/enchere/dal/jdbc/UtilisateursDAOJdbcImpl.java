@@ -5,8 +5,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 import fr.eni.enchere.bo.Utilisateur;
+import fr.eni.enchere.dal.ConnectionProvider;
 import fr.eni.enchere.dal.DALErrors;
 //import fr.eni.enchere.dal.jdbc.UtilisateurDAO;
 import fr.eni.enchere.dal.UtilisateurDAO;
@@ -20,6 +22,9 @@ private static final String sqlUserDelete = "no_utilisateur=?";
 private static final String sqlUserSelectbyPseudo = "SELECT * FROM utilisateurs WHERE pseudo=?";
 private static final String sqlUniquePseudo = "SELECT * FROM utilisateurs WHERE pseudo LIKE ?";
 private static final String sqlUniqueEmail = "SELECT * FROM utilisateurs WHERE email LIKE ?;";
+private static final String SELECT_EMAIL = "SELECT email FROM UTILISATEURS";
+private static final String SELECT_LOGIN = "SELECT * from UTILISATEURS where (email = ? or pseudo = ?) AND mot_de_passe = ?";
+private static final String SELECT_PSEUDO = "SELECT pseudo FROM UTILISATEURS";
 	
 	@Override
 	public Utilisateur selectById(int id) throws DALException {
@@ -207,5 +212,165 @@ private static final String sqlUniqueEmail = "SELECT * FROM utilisateurs WHERE e
             throw dalException;
         }
         return isUnique;
+	}
+
+	public Utilisateur selectLogin(String EmailouPseudo, String motDePasse) {
+
+	Utilisateur utilisateur = null;
+
+	ResultSet rs = null;
+	PreparedStatement pstmt = null;
+	Connection cnx = null;
+
+	try {
+		cnx = ConnectionProvider.getConnection();
+
+		pstmt = cnx.prepareStatement(SELECT_LOGIN);
+		pstmt.setString(1, EmailouPseudo);
+		pstmt.setString(2, EmailouPseudo);
+		pstmt.setString(3, motDePasse);
+
+		rs = pstmt.executeQuery();
+
+		if (rs.next()) {
+			utilisateur = utilisateurBuilder(rs);
+		}
+	} catch (Exception e) {
+
+		e.printStackTrace();
+
+	}
+
+	return utilisateur;
+	}
+
+	private Utilisateur utilisateurBuilder(ResultSet rs) {
+
+		Utilisateur utilisateur = new Utilisateur();
+
+		try {
+
+			utilisateur.setNoUtilisateur(rs.getInt("no_utilisateur"));
+			utilisateur.setPseudo(rs.getString("pseudo"));
+			utilisateur.setNom(rs.getString("nom"));
+			utilisateur.setPrenom(rs.getString("prenom"));
+			utilisateur.setEmail(rs.getString("email"));
+			utilisateur.setTelephone(rs.getString("telephone"));
+			utilisateur.setRue(rs.getString("rue"));
+			utilisateur.setCodePostal(rs.getString("code_postal"));
+			utilisateur.setVille(rs.getString("ville"));
+			utilisateur.setMotDePasse(rs.getString("mot_de_passe"));
+			utilisateur.setCredit(rs.getInt("credit"));
+			utilisateur.setAdministrateur(rs.getBoolean("administrateur"));
+
+		} catch (Exception e) {
+
+			e.printStackTrace();
+
+		}
+
+		return utilisateur;
+
+	}
+	
+	public ArrayList<String> selectAllEmail() {
+
+		ResultSet rs = null;
+		Statement stmt = null;
+		Connection cnx = null;
+
+		ArrayList<String> listMail = new ArrayList<String>();
+
+		try {
+
+			cnx = ConnectionProvider.getConnection();
+			stmt = cnx.createStatement();
+
+			rs = stmt.executeQuery(SELECT_EMAIL);
+
+			while (rs.next()) {
+
+				listMail.add(rs.getString("email"));
+
+			}
+
+		} catch (Exception e) {
+
+			e.printStackTrace();
+
+		} finally {
+
+			try {
+
+				if (rs != null) {
+					rs.close();
+				}
+				if (stmt != null) {
+					stmt.close();
+				}
+				if (cnx != null) {
+					cnx.close();
+				}
+
+			} catch (Exception e2) {
+
+				e2.printStackTrace();
+
+			}
+
+		}
+
+		return listMail;
+
+	}
+	public ArrayList<String> selectAllPseudo() {
+
+		ResultSet rs = null;
+		Statement stmt = null;
+		Connection cnx = null;
+
+		ArrayList<String> listPseudo = new ArrayList<String>();
+
+		try {
+
+			cnx = ConnectionProvider.getConnection();
+			stmt = cnx.createStatement();
+
+			rs = stmt.executeQuery(SELECT_PSEUDO);
+
+			while (rs.next()) {
+
+				listPseudo.add(rs.getString("pseudo"));
+
+			}
+
+		} catch (Exception e) {
+
+			e.printStackTrace();
+
+		} finally {
+
+			try {
+
+				if (rs != null) {
+					rs.close();
+				}
+				if (stmt != null) {
+					stmt.close();
+				}
+				if (cnx != null) {
+					cnx.close();
+				}
+
+			} catch (Exception e2) {
+
+				e2.printStackTrace();
+
+			}
+
+		}
+
+		return listPseudo;
+
 	}
 }

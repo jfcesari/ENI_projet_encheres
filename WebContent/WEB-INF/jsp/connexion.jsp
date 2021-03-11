@@ -22,7 +22,7 @@
 			</li>
 			<li>
 				<label class="txtLabel" for="motDePasse">Mot de passe :</label>
-				<input class="champs" type="password" id="motDePasse" name="motDePasse" placeholder="Mot de passe"> <!-- Paramétrer le fait que le mdp apparaisse en * -->
+				<input class="champs" type="password" id="motDePasse" name="motDePasse"> <!-- Paramétrer le fait que le mdp apparaisse en * -->
 			</li>
 		</ul>
 		<%--@elvariable id="login_error" type="boolean"--%>
