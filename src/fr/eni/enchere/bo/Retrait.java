@@ -18,9 +18,16 @@ public class Retrait {
 		setCodePostal(codePostal);
 		setVille(ville);
 	}
-
 	
 	//Getter et Setter
+	public int getNoArticle() {
+		return noArticle;
+	}
+	
+	public void setNoArticle(int noArticle) {
+		this.noArticle = noArticle;
+	}
+
 	public String getRue() {
 		return rue;
 	}
@@ -50,9 +57,4 @@ public class Retrait {
 		String s = String.format("Lieu de retrait : %s, %s %s%n", getRue(), getCodePostal(), getVille());
 		return s;
 	}
-
-	public int getNoArticle() {
-		return noArticle;
-	}
-
 }
