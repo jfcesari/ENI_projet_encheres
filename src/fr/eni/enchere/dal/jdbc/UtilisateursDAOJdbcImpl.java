@@ -22,9 +22,9 @@ private static final String sqlUserDelete = "no_utilisateur=?";
 private static final String sqlUserSelectbyPseudo = "SELECT * FROM utilisateurs WHERE pseudo=?";
 private static final String sqlUniquePseudo = "SELECT * FROM utilisateurs WHERE pseudo LIKE ?";
 private static final String sqlUniqueEmail = "SELECT * FROM utilisateurs WHERE email LIKE ?;";
-private static final String SELECT_EMAIL = "SELECT email FROM UTILISATEURS";
-private static final String SELECT_LOGIN = "SELECT * from UTILISATEURS where (email = ? or pseudo = ?) AND mot_de_passe = ?";
-private static final String SELECT_PSEUDO = "SELECT pseudo FROM UTILISATEURS";
+private static final String SqlSelectEmail = "SELECT email FROM utilisateurs";
+private static final String SqlSelectLogin = "SELECT * FROM utilisateurs WHERE (email = ? or pseudo = ?) AND mot_de_passe = ?";
+private static final String SqlSelectPseudo = "SELECT pseudo FROM utilisateurs";
 	
 	@Override
 	public Utilisateur selectById(int id) throws DALException {
@@ -225,7 +225,7 @@ private static final String SELECT_PSEUDO = "SELECT pseudo FROM UTILISATEURS";
 	try {
 		cnx = ConnectionProvider.getConnection();
 
-		pstmt = cnx.prepareStatement(SELECT_LOGIN);
+		pstmt = cnx.prepareStatement(SqlSelectLogin);
 		pstmt.setString(1, EmailouPseudo);
 		pstmt.setString(2, EmailouPseudo);
 		pstmt.setString(3, motDePasse);
@@ -286,7 +286,7 @@ private static final String SELECT_PSEUDO = "SELECT pseudo FROM UTILISATEURS";
 			cnx = ConnectionProvider.getConnection();
 			stmt = cnx.createStatement();
 
-			rs = stmt.executeQuery(SELECT_EMAIL);
+			rs = stmt.executeQuery(SqlSelectEmail);
 
 			while (rs.next()) {
 
@@ -336,7 +336,7 @@ private static final String SELECT_PSEUDO = "SELECT pseudo FROM UTILISATEURS";
 			cnx = ConnectionProvider.getConnection();
 			stmt = cnx.createStatement();
 
-			rs = stmt.executeQuery(SELECT_PSEUDO);
+			rs = stmt.executeQuery(SqlSelectPseudo);
 
 			while (rs.next()) {
 

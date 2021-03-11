@@ -7,7 +7,7 @@ public class ArticleVendu {
 	//Attributs
 	private int noArticle;
 	private String nomArticle;
-	private Categorie categorieArticle;
+	private int noCategorie;
 	private String description;
 	private Date dateDebutEncheres;
 	private Date dateFinEncheres;
@@ -21,33 +21,34 @@ public class ArticleVendu {
 		//
 	}
 	
-	//Constructeurs -> Article vendu sans lieu de retrait
-	public ArticleVendu(int noArticle, String nomArticle, Categorie categorieArticle, String description, Date dateDebutEncheres, Date dateFinEncheres, int miseAPrix, int prixVente, String etatVente) {
-		setNoArticle(noArticle);
-		setNomArticle(nomArticle);
-		setCategorieArticle(categorieArticle);
-		setDescription(description);
-		setDateDebutEncheres(dateDebutEncheres);
-		setDateFinEncheres(dateFinEncheres);
-		setMiseAPrix(miseAPrix);
-		setPrixVente(prixVente);
-		setEtatVente(etatVente);
+	public ArticleVendu(int noArticle, String nomArticle, int noCategorie, String description, Date dateDebutEncheres,
+			Date dateFinEncheres, int miseAPrix, int prixVente, String etatVente, Retrait lieuRetrait) {
+		super();
+		this.noArticle = noArticle;
+		this.nomArticle = nomArticle;
+		this.noCategorie = noCategorie;
+		this.description = description;
+		this.dateDebutEncheres = dateDebutEncheres;
+		this.dateFinEncheres = dateFinEncheres;
+		this.miseAPrix = miseAPrix;
+		this.prixVente = prixVente;
+		this.etatVente = etatVente;
 	}
 	
-	//Constructeurs -> Article vendu avec lieu de retrait
-	public ArticleVendu(int noArticle, String nomArticle, Categorie categorieArticle, String description, Date dateDebutEncheres, Date dateFinEncheres, int miseAPrix, int prixVente, String etatVente, Retrait lieuRetrait) {
-		setNoArticle(noArticle);
-		setNomArticle(nomArticle);
-		setCategorieArticle(categorieArticle);
-		setDescription(description);
-		setDateDebutEncheres(dateDebutEncheres);
-		setDateFinEncheres(dateFinEncheres);
-		setMiseAPrix(miseAPrix);
-		setPrixVente(prixVente);
-		setEtatVente(etatVente);
-		setLieuRetrait(lieuRetrait);
+	public ArticleVendu(int noArticle, String nomArticle, int noCategorie, String description, Date dateDebutEncheres,
+			Date dateFinEncheres, int miseAPrix, int prixVente, String etatVente) {
+		super();
+		this.noArticle = noArticle;
+		this.nomArticle = nomArticle;
+		this.noCategorie = noCategorie;
+		this.description = description;
+		this.dateDebutEncheres = dateDebutEncheres;
+		this.dateFinEncheres = dateFinEncheres;
+		this.miseAPrix = miseAPrix;
+		this.prixVente = prixVente;
+		this.etatVente = etatVente;
 	}
-	
+
 	//Getter et Setter
 	public int getNoArticle() {
 		return noArticle;
@@ -65,12 +66,12 @@ public class ArticleVendu {
 		this.nomArticle = nomArticle;
 	}
 	
-	public Categorie getCategorieArticle() {
-		return categorieArticle;
+	public int getNoCategorie() {
+		return noCategorie;
 	}
 
-	public void setCategorieArticle(Categorie categorieArticle) {
-		this.categorieArticle = categorieArticle;
+	public void setNoCategorie(int noCategorie) {
+		this.noCategorie = noCategorie;
 	}
 	
 	public String getDescription() {
@@ -139,5 +140,5 @@ public class ArticleVendu {
 			s = String.format("Numéro de l'article : %d%n Nom de l'article : %s%n Catégorie de l'article : %s%n Description : %s%n Date début de l'enchère : %s%n Date fin de l'enchère : %s%n Mise à prix : %d%n Prix de vente : %d%n État de la vente : %s%n", 
 			getNoArticle(), getNomArticle(), getCategorieArticle(), getDescription(), getDateDebutEncheres(), getDateFinEncheres(), getMiseAPrix(), getPrixVente(), getEtatVente());	
 		} return s;
-	}	
+	}
 }

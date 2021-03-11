@@ -40,4 +40,5 @@ public class Enchere {
 		String s = String.format("Date de l'enchère : %s%n Montant de l'enchère : %d%n", getDateEnchere(), getMontantEnchere());
 		return s;
 	}
+
 }
