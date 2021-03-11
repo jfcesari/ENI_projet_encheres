@@ -24,7 +24,7 @@
 			<li>
 				<select name="categorie">
 					<option value="toutesCategories">Toutes catégories</option>
-					<option class="categorie" value="categorieInformatique">Informatique</option>
+					<option class="categorie" value="categorieInformatique">Informatique&Électroménager</option>
 					<option class="categorie" value="categorieAmeublement">Ameublement</option>
 					<option class="categorie" value="categorieVetement">Vêtement</option>
 					<option class="categorie" value="categorieSport&Loisirs">Sport&Loisirs</option>
@@ -38,7 +38,7 @@
 		
 		<form action="<%=request.getContextPath()%>/ServletAccueil" method="post">
 			<div>
-				<input type="radio" id="achats" name="filtre" value="1"  disabled="disable()"/>
+				<input type="radio" id="achats" name="filtre" value="1"/>
 				<label class="txtLabel" for="achats">Achats</label>
 			
 				<ul>
@@ -89,7 +89,9 @@
 			
 			<script>
 				function disable() {
-  					document.getElementById("ventesEnCours").disabled = true;
+					if(document.getElementById("achats").checked = true){
+						document.getElementById("ventesEnCours").disabled = true;
+					}
 				}
 			</script>
 			

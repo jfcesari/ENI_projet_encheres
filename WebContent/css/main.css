@@ -39,7 +39,7 @@ label{
 
 .txtCheckbox{
 	display:block;
-	text-align:left;
+	/*text-align:left;*/
 	font-size:0.8em;
 }
 
