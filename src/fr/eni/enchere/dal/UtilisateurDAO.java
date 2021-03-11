@@ -37,4 +37,6 @@ public interface UtilisateurDAO {
 
 		public ArrayList<String> selectAllPseudo();
 
+		public void insertUser(Utilisateur utilisateur);
+
 }

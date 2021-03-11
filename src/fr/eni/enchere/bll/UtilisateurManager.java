@@ -36,7 +36,7 @@ public class UtilisateurManager {
 		
 		try {
 			
-			utilisateur = UtilisateurDAO.selectLogin(EmailouPseudo, motDePasse);
+		    utilisateur = daoUsr.selectLogin(EmailouPseudo, motDePasse);
 			
 		} catch (Exception e) {
 			
@@ -88,33 +88,32 @@ public class UtilisateurManager {
 
     public Utilisateur insertUser(int noUtilisateur, String pseudo, String nom, String prenom, String email, String telephone, String rue, String codePostal, String ville, String motDePasse, int credit, boolean administrateur) {
 		
-		Utilisateur utilisateurs = new Utilisateur();
+		Utilisateur utilisateur = new Utilisateur();
 	
-		utilisateurs.setPseudo(pseudo);
-		utilisateurs.setNom(nom);
-		utilisateurs.setPrenom(prenom);
-		utilisateurs.setEmail(email);
-		utilisateurs.setTelephone(telephone);
-		utilisateurs.setRue(rue);
-		utilisateurs.setCodePostal(codePostal);
-		utilisateurs.setVille(ville);
-		utilisateurs.setMotDePasse(motDePasse);
-		utilisateurs.setCredit(0);
-		utilisateurs.setAdministrateur(false);
+		utilisateur.setPseudo(pseudo);
+		utilisateur.setNom(nom);
+		utilisateur.setPrenom(prenom);
+		utilisateur.setEmail(email);
+		utilisateur.setTelephone(telephone);
+		utilisateur.setRue(rue);
+		utilisateur.setCodePostal(codePostal);
+		utilisateur.setVille(ville);
+		utilisateur.setMotDePasse(motDePasse);
+		utilisateur.setCredit(0);
+		utilisateur.setAdministrateur(false);
 		if(verifMail(email) == true && verifPseudo(pseudo) == true) {
-			this.UtilisateurDAO.insertUser(utilisateurs); 
+			this.daoUsr.insertUser(utilisateur); 
 			System.out.println("CPALAMERDE");
 			
 		}else {
-			//throw new BusinessException("L'email est déjà utilisé, veuillez en utiliser un autre.");
 			System.out.println("CLAMERDE");
 		}
-		return utilisateurs;
+		return utilisateur;
 		
 	}
     
 	private boolean verifPseudo(String pseudo2) {
-		ArrayList<String> listPseudo = UtilisateurDAO.selectAllPseudo();
+		ArrayList<String> listPseudo = daoUsr.selectAllPseudo();
 		
 		for (String pseudo : listPseudo) {
 			
@@ -168,7 +167,7 @@ public class UtilisateurManager {
 
     	public Boolean verifMail (String mail) {
 		
-		ArrayList<String> listMail = UtilisateurDAO.selectAllEmail();
+		ArrayList<String> listMail = daoUsr.selectAllEmail();
 		
 		for (String email : listMail) {
 			

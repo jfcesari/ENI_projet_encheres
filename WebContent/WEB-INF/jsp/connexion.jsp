@@ -17,8 +17,8 @@
 	<form action="<%=request.getContextPath()%>/ServletConnexion" method="post" action="j_security_check"> <!-- Mettre dans action le chemin de la page vers laquelle les infos seront envoyées -->
 		<ul>
 			<li>
-				<label class="txtLabel" for="identifiant">Identifiant :</label>
-				<input class="champs" type="text" id="identifiant" name="identifiant"/> <!-- L'identifiant peut être le mail ou le pseudo -->
+				<label class="txtLabel" for="EmailouPseudo">Identifiant :</label>
+				<input class="champs" type="text" id="EmailouPseudo" name="EmailouPseudo"/> <!-- L'identifiant peut être le mail ou le pseudo -->
 			</li>
 			<li>
 				<label class="txtLabel" for="motDePasse">Mot de passe :</label>
@@ -27,7 +27,7 @@
 		</ul>
 		<%--@elvariable id="login_error" type="boolean"--%>
     	<c:if test="${login_error}">
-            <p class="text-danger text-center">Identifiant ou mot de passe incorrect</p>
+            <p>Identifiant ou mot de passe incorrect</p>
     	</c:if>
 		<div class="checkbox">
 			<label for="souvenirUtilisateur">

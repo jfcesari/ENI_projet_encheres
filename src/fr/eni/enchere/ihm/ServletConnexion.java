@@ -43,7 +43,7 @@ public class ServletConnexion extends HttpServlet {
 			}
 		}
 		
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/connexion/Connexion.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/Connexion.jsp");
 		
 		rd.forward(request, response);
 		

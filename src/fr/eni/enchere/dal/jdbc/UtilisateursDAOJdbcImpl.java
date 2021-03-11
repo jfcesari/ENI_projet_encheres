@@ -373,4 +373,63 @@ private static final String SELECT_PSEUDO = "SELECT pseudo FROM UTILISATEURS";
 		return listPseudo;
 
 	}
+	
+	@Override
+	public void insertUser(Utilisateur utilisateurs) {
+
+		ResultSet rs = null;
+		PreparedStatement pstmt = null;
+		Connection cnx = null;
+
+		try {
+
+			cnx = ConnectionProvider.getConnection();
+			pstmt = cnx.prepareStatement(sqlUserInsert, PreparedStatement.RETURN_GENERATED_KEYS);
+			pstmt.setString(1, utilisateurs.getPseudo());
+			pstmt.setString(2, utilisateurs.getNom());
+			pstmt.setString(3, utilisateurs.getPrenom());
+			pstmt.setString(4, utilisateurs.getEmail());
+			pstmt.setString(5, utilisateurs.getTelephone());
+			pstmt.setString(6, utilisateurs.getRue());
+			pstmt.setString(7, utilisateurs.getCodePostal());
+			pstmt.setString(8, utilisateurs.getVille());
+			pstmt.setString(9, utilisateurs.getMotDePasse());
+			pstmt.setInt(10, 0);
+			pstmt.setBoolean(11, false);
+
+			pstmt.executeUpdate();
+
+			rs = pstmt.getGeneratedKeys();
+
+			if (rs.next()) {
+				utilisateurs.setNoUtilisateur(rs.getInt(1));
+			}
+
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+
+		} finally {
+
+			try {
+
+				if (rs != null) {
+					rs.close();
+				}
+
+				if (pstmt != null) {
+					pstmt.close();
+				}
+
+				if (cnx != null) {
+					cnx.close();
+				}
+
+			} catch (SQLException e) {
+
+				e.printStackTrace();
+
+			}
+		}
+	}
 }
