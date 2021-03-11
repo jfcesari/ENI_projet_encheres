@@ -24,8 +24,8 @@ private static final String SqlSelectByEtat = "SELECT no_article FROM articles_v
 private static final String SqlSelectBySellerAndState = "SELECT AV.no_article FROM utilisateurs U INNER JOIN articles_vendus AV on U.no_utilisateur = AV.no_utilisateur WHERE U.no_utilisateur = ? AND AV.etat_vente = ?";
 private static final String SqlSelectByName = "SELECT * FROM articles_vendus WHERE nom_article LIKE ?";
 private static final String SqlUpdateById = "UPDATE articles_vendus SET nom_article = ?, description = ?, date_debut_encheres = ?, date_fin_encheres = ?, prix_initial = ?, prix_vente = ?, etat_vente = ?, no_utilisateur = ?, no_categorie = ? WHERE no_article= ?;";
-private static final String SqlUpdateCurrentPrice = "UPDATE artciles_vedus SET prix_vente = ? WHERE no_article = ?";
-private static final String SqlDelete = "DELETE FROM articles_vendus WHERE no_article = ? ";
+private static final String SqlUpdateCurrentPrice = "UPDATE artiles_vendus SET prix_vente = ? WHERE no_article = ?";
+private static final String SqlDelete = "DELETE FROM articles_vendus WHERE no_article = ?";
 
 		@Override
 		public void insert(ArticleVendu soldArt) throws DALException {
@@ -85,7 +85,7 @@ private static final String SqlDelete = "DELETE FROM articles_vendus WHERE no_ar
 	            ps.execute();
 	            ResultSet rs = ps.getResultSet();
 	            while (rs.next()) {
-	                articlesVendus.add(new ArticleVendu(rs.getInt("noArticle"), rs.getString("nomArticle"),  rs.getInt("noCategorie"), rs.getString("description"), rs.getDate("dateDebutEncheres"), rs.getDate("dateFinEncheres"),  rs.getInt("miseAPrix"),  rs.getInt("PrixVente"),  rs.getString("etatVente")));				
+	                articlesVendus.add(new ArticleVendu(rs.getInt("noArticle"), rs.getString("nomArticle"), rs.getInt("noCategorie"), rs.getString("description"), rs.getDate("dateDebutEncheres"), rs.getDate("dateFinEncheres"), rs.getInt("miseAPrix"), rs.getInt("PrixVente"), rs.getString("etatVente")));				
 				}
 	            cnx.close();
 	        } catch (SQLException e) {
@@ -109,7 +109,7 @@ private static final String SqlDelete = "DELETE FROM articles_vendus WHERE no_ar
 				rs=ps.executeQuery();
 				cnx.close();
 				while (rs.next()) {
-	                articlesVendus.add(new ArticleVendu(rs.getInt("noArticle"), rs.getString("nomArticle"), rs.getInt("noCategorie"), rs.getString("description"), rs.getDate("dateDebutEncheres"), rs.getDate("dateFinEncheres"),  rs.getInt("miseAPrix"),  rs.getInt("PrixVente"),  rs.getString("etatVente")));				
+	                articlesVendus.add(new ArticleVendu(rs.getInt("noArticle"), rs.getString("nomArticle"), rs.getInt("noCategorie"), rs.getString("description"), rs.getDate("dateDebutEncheres"), rs.getDate("dateFinEncheres"), rs.getInt("miseAPrix"), rs.getInt("PrixVente"), rs.getString("etatVente")));				
 				}
 	            cnx.close();
 	        } catch (SQLException e) {
@@ -175,7 +175,7 @@ private static final String SqlDelete = "DELETE FROM articles_vendus WHERE no_ar
 	            ps.execute();
 	            ResultSet rs = ps.getResultSet();
 	            while(rs.next()) {
-	            	 articlesVendus.add(new ArticleVendu(rs.getInt("noArticle"), rs.getString("nomArticle"), rs.getInt("noCategorie"), rs.getString("description"), rs.getDate("dateDebutEncheres"), rs.getDate("dateFinEncheres"),  rs.getInt("miseAPrix"),  rs.getInt("PrixVente"),  rs.getString("etatVente")));				
+	            	 articlesVendus.add(new ArticleVendu(rs.getInt("noArticle"), rs.getString("nomArticle"), rs.getInt("noCategorie"), rs.getString("description"), rs.getDate("dateDebutEncheres"), rs.getDate("dateFinEncheres"), rs.getInt("miseAPrix"), rs.getInt("PrixVente"), rs.getString("etatVente")));				
 				}
 	            cnx.close();
 	        } catch (SQLException e) {
