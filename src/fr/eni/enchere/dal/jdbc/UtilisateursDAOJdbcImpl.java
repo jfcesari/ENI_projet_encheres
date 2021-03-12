@@ -17,13 +17,13 @@ public class UtilisateursDAOJdbcImpl implements UtilisateurDAO {
 private static final String sqlUserSelectbyId = "SELECT * FROM utilisateurs WHERE no_utilisateur=?";
 private static final String SqlSelectLogin = "SELECT * FROM utilisateurs WHERE (email = ? or pseudo = ?) AND mot_de_passe = ?";
 private static final String sqlUserSelectbyPseudo = "SELECT * FROM utilisateurs WHERE pseudo=?";
-private static final String sqlUserUpdate = "UPDATE utilisateurs SET pseudo=?, nom=?, prenom=?, email=?, telephone=?, rue=?, code_postal=?, ville=?, mot_de_passe=?, credit=?, administrateur=?";
-private static final String sqlUserInsert = "INSERT into utilisateurs (pseudo,nom,prenom,email,telephone,rue,code_postal,ville,mot_de_passe,credit,administrateur) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
-private static final String sqlUserDelete = "no_utilisateur=?";
-private static final String sqlUniquePseudo = "SELECT * FROM utilisateurs WHERE pseudo LIKE ?";
-private static final String sqlUniqueEmail = "SELECT * FROM utilisateurs WHERE email LIKE ?;";
 private static final String SqlSelectEmail = "SELECT email FROM utilisateurs";
 private static final String SqlSelectPseudo = "SELECT pseudo FROM utilisateurs";
+private static final String sqlUserUpdate = "UPDATE utilisateurs SET pseudo=?, nom=?, prenom=?, email=?, telephone=?, rue=?, code_postal=?, ville=?, mot_de_passe=?, credit=?, administrateur=?";
+private static final String sqlUserInsert = "INSERT into utilisateurs (pseudo,nom,prenom,email,telephone,rue,code_postal,ville,mot_de_passe,credit,administrateur) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
+private static final String sqlUserDelete = "DELETE * FROM utilisateurs WHERE no_utilisateur=?";
+private static final String sqlUniquePseudo = "SELECT * FROM utilisateurs WHERE pseudo LIKE ?";
+private static final String sqlUniqueEmail = "SELECT * FROM utilisateurs WHERE email LIKE ?;";
 	
 	@Override
 	public Utilisateur selectById(int id) throws DALException {
@@ -83,7 +83,6 @@ private static final String SqlSelectPseudo = "SELECT pseudo FROM utilisateurs";
 		ps=cnx.prepareStatement(sqlUserSelectbyPseudo);
 		ps.setString(1, pseudo_utilisateur);
 		rs=ps.executeQuery();
-		cnx.close();
 		
 	utilisateur=new Utilisateur(rs.getInt("no_utilisateur"), rs.getString("pseudo"), rs.getString("nom"), rs.getString("prenom"), rs.getString("email"), rs.getString("telephone"),  rs.getString("rue"),  rs.getString("code_postal"),  rs.getString("ville"), rs.getString("mot_de_passe"), rs.getInt("credit"), rs.getBoolean("administrateur"));
 	cnx.close();
@@ -95,6 +94,48 @@ private static final String SqlSelectPseudo = "SELECT pseudo FROM utilisateurs";
             }
 	return utilisateur;
 }
+
+	public ArrayList<String> selectAllEmail() throws DALException {
+		Connection cnx=JdbcTools.connect();
+		Statement stmt = null;
+		ArrayList<String> listMail = new ArrayList<String>();
+		try {
+			PreparedStatement ps = cnx.prepareStatement(SqlSelectEmail);
+            ps.execute();
+            ResultSet rs = ps.getResultSet();
+			while (rs.next()) {
+				listMail.add(rs.getString("email"));
+				cnx.close();
+			}
+			} catch (SQLException e) {
+					e.printStackTrace();
+		            DALException dalException = new DALException();
+		            dalException.addError(DALErrors.error_select);
+		            throw dalException;
+		            }
+		return listMail;
+	}
+	
+	public ArrayList<String> selectAllPseudo() {
+		Connection cnx=JdbcTools.connect();
+		Statement stmt = null;
+		ArrayList<String> listPseudo = new ArrayList<String>();
+		try {
+			PreparedStatement ps = cnx.prepareStatement(SqlSelectPseudo);
+            ps.execute();
+            ResultSet rs = ps.getResultSet();
+			while (rs.next()) {
+				listPseudo.add(rs.getString("pseudo"));
+				cnx.close();
+			}
+			} catch (SQLException e) {
+					e.printStackTrace();
+		            DALException dalException = new DALException();
+		            dalException.addError(DALErrors.error_select);
+		            throw dalException;
+		            }
+		return listPseudo;
+	}
 	
 	@Override
 	public void update(Utilisateur usr) throws DALException {
@@ -237,164 +278,4 @@ private static final String SqlSelectPseudo = "SELECT pseudo FROM utilisateurs";
         }
         return isUnique;
 	}
-
-	public ArrayList<String> selectAllEmail() {
-
-		ResultSet rs = null;
-		Statement stmt = null;
-		Connection cnx = null;
-
-		ArrayList<String> listMail = new ArrayList<String>();
-
-		try {
-
-			cnx = ConnectionProvider.getConnection();
-			stmt = cnx.createStatement();
-
-			rs = stmt.executeQuery(SqlSelectEmail);
-
-			while (rs.next()) {
-
-				listMail.add(rs.getString("email"));
-
-			}
-
-		} catch (Exception e) {
-
-			e.printStackTrace();
-
-		} finally {
-
-			try {
-
-				if (rs != null) {
-					rs.close();
-				}
-				if (stmt != null) {
-					stmt.close();
-				}
-				if (cnx != null) {
-					cnx.close();
-				}
-
-			} catch (Exception e2) {
-
-				e2.printStackTrace();
-
-			}
-
-		}
-
-		return listMail;
-
-	}
-	public ArrayList<String> selectAllPseudo() {
-
-		ResultSet rs = null;
-		Statement stmt = null;
-		Connection cnx = null;
-
-		ArrayList<String> listPseudo = new ArrayList<String>();
-
-		try {
-
-			cnx = ConnectionProvider.getConnection();
-			stmt = cnx.createStatement();
-
-			rs = stmt.executeQuery(SqlSelectPseudo);
-
-			while (rs.next()) {
-
-				listPseudo.add(rs.getString("pseudo"));
-
-			}
-
-		} catch (Exception e) {
-
-			e.printStackTrace();
-
-		} finally {
-
-			try {
-
-				if (rs != null) {
-					rs.close();
-				}
-				if (stmt != null) {
-					stmt.close();
-				}
-				if (cnx != null) {
-					cnx.close();
-				}
-
-			} catch (Exception e2) {
-
-				e2.printStackTrace();
-
-			}
-
-		}
-
-		return listPseudo;
-
-	}
-	
-//	@Override
-//	public void insertUser(Utilisateur utilisateurs) {
-//
-//		ResultSet rs = null;
-//		PreparedStatement pstmt = null;
-//		Connection cnx = null;
-//
-//		try {
-//
-//			cnx = ConnectionProvider.getConnection();
-//			pstmt = cnx.prepareStatement(sqlUserInsert, PreparedStatement.RETURN_GENERATED_KEYS);
-//			pstmt.setString(1, utilisateurs.getPseudo());
-//			pstmt.setString(2, utilisateurs.getNom());
-//			pstmt.setString(3, utilisateurs.getPrenom());
-//			pstmt.setString(4, utilisateurs.getEmail());
-//			pstmt.setString(5, utilisateurs.getTelephone());
-//			pstmt.setString(6, utilisateurs.getRue());
-//			pstmt.setString(7, utilisateurs.getCodePostal());
-//			pstmt.setString(8, utilisateurs.getVille());
-//			pstmt.setString(9, utilisateurs.getMotDePasse());
-//			pstmt.setInt(10, 0);
-//			pstmt.setBoolean(11, false);
-//
-//			pstmt.executeUpdate();
-//
-//			rs = pstmt.getGeneratedKeys();
-//
-//			if (rs.next()) {
-//				utilisateurs.setNoUtilisateur(rs.getInt(1));
-//			}
-//
-//		} catch (SQLException e) {
-//
-//			e.printStackTrace();
-//
-//		} finally {
-//
-//			try {
-//
-//				if (rs != null) {
-//					rs.close();
-//				}
-//
-//				if (pstmt != null) {
-//					pstmt.close();
-//				}
-//
-//				if (cnx != null) {
-//					cnx.close();
-//				}
-//
-//			} catch (SQLException e) {
-//
-//				e.printStackTrace();
-//
-//			}
-//		}
-//	}
 }

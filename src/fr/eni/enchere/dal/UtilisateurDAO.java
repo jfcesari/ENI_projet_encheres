@@ -4,7 +4,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import	fr.eni.enchere.bo.Utilisateur;
-//import	fr.eni.enchere.dal.jdbc.UtilisateursDAOJdbcImpl;
 import fr.eni.enchere.dal.jdbc.DALException;
 
 //import java.util.List;
@@ -15,6 +14,12 @@ public interface UtilisateurDAO {
 		public Utilisateur selectById(int id) throws DALException;
 		
 		Utilisateur selectLogin(String EmailouPseudo, String motDePasse) throws DALException;
+		
+		public Utilisateur selectByPseudo(String pseudo_utilisateur) throws DALException;
+		
+		public ArrayList<String> selectAllEmail() throws DALException;
+
+		public ArrayList<String> selectAllPseudo() throws DALException;
 		
 		//Modifier les infos d'un utilisateur connu en BD
 		public void update(Utilisateur data) throws DALException;
@@ -30,11 +35,4 @@ public interface UtilisateurDAO {
 		public boolean checkForUniquePseudo(String pseudo) throws DALException;
 
 		public boolean checkForUniqueEmail(String email) throws DALException;
-
-		public Utilisateur selectByPseudo(String pseudo_utilisateur) throws DALException;
-		
-		public ArrayList<String> selectAllEmail();
-
-		public ArrayList<String> selectAllPseudo();
-
 }
