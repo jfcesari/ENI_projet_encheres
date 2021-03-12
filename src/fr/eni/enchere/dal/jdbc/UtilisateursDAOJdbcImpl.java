@@ -16,6 +16,7 @@ import fr.eni.enchere.dal.UtilisateurDAO;
 public class UtilisateursDAOJdbcImpl implements UtilisateurDAO {
 
 private static final String sqlUserSelectbyId = "SELECT * FROM utilisateurs WHERE no_utilisateur=?";
+private static final String SqlSelectLogin = "SELECT * FROM utilisateurs WHERE (email = ? or pseudo = ?) AND mot_de_passe = ?";
 private static final String sqlUserSelectbyPseudo = "SELECT * FROM utilisateurs WHERE pseudo=?";
 private static final String sqlUserUpdate = "UPDATE utilisateurs SET pseudo=?, nom=?, prenom=?, email=?, telephone=?, rue=?, code_postal=?, ville=?, mot_de_passe=?, credit=?, administrateur=?";
 private static final String sqlUserInsert = "INSERT into utilisateurs (pseudo,nom,prenom,email,telephone,rue,code_postal,ville,mot_de_passe,credit,administrateur) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
@@ -23,7 +24,6 @@ private static final String sqlUserDelete = "no_utilisateur=?";
 private static final String sqlUniquePseudo = "SELECT * FROM utilisateurs WHERE pseudo LIKE ?";
 private static final String sqlUniqueEmail = "SELECT * FROM utilisateurs WHERE email LIKE ?;";
 private static final String SqlSelectEmail = "SELECT email FROM utilisateurs";
-private static final String SqlSelectLogin = "SELECT * FROM utilisateurs WHERE (email = ? or pseudo = ?) AND mot_de_passe = ?";
 private static final String SqlSelectPseudo = "SELECT pseudo FROM utilisateurs";
 	
 	@Override
@@ -47,6 +47,30 @@ private static final String SqlSelectPseudo = "SELECT pseudo FROM utilisateurs";
             throw dalException;
 			}
 		return utilisateur;
+	}
+	
+	@Override
+	public Utilisateur selectLogin(String EmailouPseudo, String motDePasse) throws DALException {
+		Connection cnx=JdbcTools.connect();
+		PreparedStatement ps=null;
+		ResultSet rs=null;
+		Utilisateur utilisateur=null;
+		try {
+			ps=cnx.prepareStatement(SqlSelectLogin);
+			ps.setString(1, email);
+			ps.setString(2, pseudo);
+			ps.setString(3, mot_de_passe);
+			rs=ps.executeQuery();
+			cnx.close();
+			
+		utilisateur=new Utilisateur(rs.getInt("no_utilisateur"), rs.getString("pseudo"), rs.getString("nom"), rs.getString("prenom"), rs.getString("email"), rs.getString("telephone"),  rs.getString("rue"),  rs.getString("code_postal"),  rs.getString("ville"), rs.getString("mot_de_passe"), rs.getInt("credit"), rs.getBoolean("administrateur"));
+		cnx.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            DALException dalException = new DALException();
+            dalException.addError(DALErrors.error_update);
+            throw dalException;
+        }
 	}
 	
 	@Override
@@ -212,32 +236,6 @@ private static final String SqlSelectPseudo = "SELECT pseudo FROM utilisateurs";
             throw dalException;
         }
         return isUnique;
-	}
-
-	public Utilisateur selectLogin(String EmailouPseudo, String motDePasse) {
-	Utilisateur utilisateur = null;
-	ResultSet rs = null;
-	PreparedStatement pstmt = null;
-	Connection cnx = null;
-	try {
-		cnx = ConnectionProvider.getConnection();
-		pstmt = cnx.prepareStatement(SqlSelectLogin);
-		pstmt.setString(1, EmailouPseudo);
-		pstmt.setString(2, EmailouPseudo);
-		pstmt.setString(3, motDePasse);
-
-		rs = pstmt.executeQuery();
-
-		if (rs.next()) {
-			utilisateur = utilisateurBuilder(rs);
-		}
-	} catch (Exception e) {
-
-		e.printStackTrace();
-
-	}
-
-	return utilisateur;
 	}
 
 	private Utilisateur utilisateurBuilder(ResultSet rs) {

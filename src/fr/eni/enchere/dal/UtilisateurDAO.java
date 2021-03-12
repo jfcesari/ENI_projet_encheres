@@ -14,6 +14,8 @@ public interface UtilisateurDAO {
 		//sélectionner Utilisateur par son noUtilisateur
 		public Utilisateur selectById(int id) throws DALException;
 		
+		Utilisateur selectLogin(String EmailouPseudo, String motDePasse) throws DALException;
+		
 		//Modifier les infos d'un utilisateur connu en BD
 		public void update(Utilisateur data) throws DALException;
 		
@@ -30,8 +32,6 @@ public interface UtilisateurDAO {
 		public boolean checkForUniqueEmail(String email) throws DALException;
 
 		public Utilisateur selectByPseudo(String pseudo_utilisateur) throws DALException;
-
-		Utilisateur selectLogin(String EmailouPseudo, String motDePasse);
 		
 		public ArrayList<String> selectAllEmail();
 
