@@ -25,10 +25,6 @@
 				<input class="champs" type="password" id="motDePasse" name="motDePasse"> <!-- Paramétrer le fait que le mdp apparaisse en * -->
 			</li>
 		</ul>
-		<%--@elvariable id="login_error" type="boolean"--%>
-    	<c:if test="${login_error}">
-            <p>Identifiant ou mot de passe incorrect</p>
-    	</c:if>
 		<div class="checkbox">
 			<label for="souvenirUtilisateur">
 				<input type="checkbox" id="souvenirUtilisateur" name="souvenirUtilisateur" value="1"/> <!-- Quelle valeur attribuer ? Si nb récup =1, on enregistre, si non, on enregistre pas ? -->

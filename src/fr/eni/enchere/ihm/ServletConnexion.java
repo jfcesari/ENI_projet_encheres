@@ -94,7 +94,6 @@ public class ServletConnexion extends HttpServlet {
 	            } else {
 	                HttpSession session = request.getSession();
 	                session.setAttribute("utilisateur", utilisateur);
-	                //response.sendRedirect("/WEB-INF/connexion/AcceuilConnecte.jsp");
 	                request.getRequestDispatcher("/WEB-INF/jsp/pageAccueil.jsp").forward(request, response);
 	                
 	                

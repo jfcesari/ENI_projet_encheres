@@ -50,16 +50,16 @@ private static final String SqlSelectPseudo = "SELECT pseudo FROM utilisateurs";
 	}
 	
 	@Override
-	public Utilisateur selectLogin(String EmailouPseudo, String motDePasse) throws DALException {
+	public Utilisateur selectLogin(String emailouPseudo, String motDePasse) throws DALException {
 		Connection cnx=JdbcTools.connect();
 		PreparedStatement ps=null;
 		ResultSet rs=null;
 		Utilisateur utilisateur=null;
 		try {
 			ps=cnx.prepareStatement(SqlSelectLogin);
-			ps.setString(1, email);
-			ps.setString(2, pseudo);
-			ps.setString(3, mot_de_passe);
+			ps.setString(1, emailouPseudo);
+			ps.setString(2, emailouPseudo);
+			ps.setString(3, motDePasse);
 			rs=ps.executeQuery();
 			cnx.close();
 			
@@ -71,6 +71,7 @@ private static final String SqlSelectPseudo = "SELECT pseudo FROM utilisateurs";
             dalException.addError(DALErrors.error_update);
             throw dalException;
         }
+		return utilisateur;
 	}
 	
 	@Override
