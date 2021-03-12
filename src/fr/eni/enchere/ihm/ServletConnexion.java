@@ -43,7 +43,7 @@ public class ServletConnexion extends HttpServlet {
 			}
 		}
 		
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/Connexion.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/connexion.jsp");
 		
 		rd.forward(request, response);
 		
@@ -89,13 +89,13 @@ public class ServletConnexion extends HttpServlet {
 	           if(utilisateur == null) {
 	                String error = "Mot de passe ou Pseudo incorrect";
 	                request.setAttribute("message", error);
-	                request.getRequestDispatcher("/WEB-INF/jsp/Connexion.jsp").forward(request,response);
+	                request.getRequestDispatcher("/WEB-INF/jsp/connexion.jsp").forward(request,response);
 	                
 	            } else {
 	                HttpSession session = request.getSession();
 	                session.setAttribute("utilisateur", utilisateur);
 	                //response.sendRedirect("/WEB-INF/connexion/AcceuilConnecte.jsp");
-	                request.getRequestDispatcher("/WEB-INF/jsp/PageAccueil.jsp").forward(request, response);
+	                request.getRequestDispatcher("/WEB-INF/jsp/pageAccueil.jsp").forward(request, response);
 	                
 	                
 	                
