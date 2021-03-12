@@ -33,8 +33,8 @@ public class ServletConnexion extends HttpServlet {
 			
 			for(Cookie cookie : cookies) {
 				
-				if (cookie.getName().equals("EmailouPseudo")) {
-                    request.setAttribute("EmailouPseudo", cookie.getValue());
+				if (cookie.getName().equals("emailouPseudo")) {
+                    request.setAttribute("emailouPseudo", cookie.getValue());
 				}
 				
 				if (cookie.getName().equals("motDePasse")) {
@@ -67,13 +67,13 @@ public class ServletConnexion extends HttpServlet {
 		String save = null;
 		Utilisateur utilisateur = null;
 		
-		EmailouPseudo = request.getParameter("EmailouPseudo");
+		EmailouPseudo = request.getParameter("emailouPseudo");
 		motDePasse = request.getParameter("motDePasse");
 		save = request.getParameter("save");
 		
 		if(save != null) {
 			
-			Cookie cookie = new Cookie("EmailouPseudo", EmailouPseudo);
+			Cookie cookie = new Cookie("emailouPseudo", EmailouPseudo);
 			cookie.setMaxAge(60 * 60 * 24 * 30);
 			response.addCookie(cookie);
 			
