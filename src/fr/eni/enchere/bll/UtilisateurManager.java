@@ -59,7 +59,7 @@ public class UtilisateurManager {
     }
 
     //CRUD: insert
-    public Utilisateur insertUtilisateur(int noUtilisateur, String pseudo, String nom, String prenom, String email, String telephone, String rue, String codePostal, String ville, String motDePasse, int credit, boolean administrateur) {
+    public Utilisateur insertUtilisateur(int noUtilisateur, String pseudo, String nom, String prenom, String email, String telephone, String rue, String codePostal, String ville, String motDePasse, int credit, boolean administrateur) throws DALException {
 		
 		Utilisateur utilisateur = new Utilisateur();
 	
@@ -91,7 +91,7 @@ public class UtilisateurManager {
 		
 	}
 
-	private boolean verifPseudo(String pseudo2) {
+	private boolean verifPseudo(String pseudo2) throws DALException {
 		ArrayList<String> listPseudo = daoUsr.selectAllPseudo();
 		for (String pseudo : listPseudo) {
 			if(pseudo2.equals(pseudo)) return false;	
@@ -141,7 +141,7 @@ public class UtilisateurManager {
         return bllException;
     }
 
-    	public Boolean verifMail (String mail) {
+    	public Boolean verifMail (String mail) throws DALException {
 		ArrayList<String> listMail = daoUsr.selectAllEmail();
 		for (String email : listMail) {
 			if(mail.equals(email)) return false;	
