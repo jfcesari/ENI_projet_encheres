@@ -28,7 +28,7 @@ public class ServletCreationUtilisateur extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/connexion/CreationCompte.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/creationCompteUtilisateur.jsp");
 		
 		rd.forward(request, response);
 	}
@@ -55,7 +55,7 @@ public class ServletCreationUtilisateur extends HttpServlet {
 		String codePostal = null;
 		String ville = null;
 		String motDePasse = null;
-		String confirmMotDePasse = null;
+		String confirmationMotDePasse = null;
 		
 		pseudo = request.getParameter("pseudo").trim();
 		nom = request.getParameter("nom").trim();
@@ -66,23 +66,23 @@ public class ServletCreationUtilisateur extends HttpServlet {
 		codePostal = request.getParameter("codePostal");
 		ville = request.getParameter("ville").trim();
 		motDePasse = request.getParameter("motDePasse").trim();
-		confirmMotDePasse = request.getParameter("confirmMotDePasse").trim();
+		confirmationMotDePasse = request.getParameter("confirmationMotDePasse").trim();
 		
 		Utilisateur user = new Utilisateur(pseudo, nom, prenom, email, telephone, rue, codePostal, ville, motDePasse, 0, false); 
 		
 		try {
 			
-			newUser.insertUser(0, pseudo, nom, prenom, email, telephone, rue, codePostal, ville, confirmMotDePasse, 0, false);
+			newUser.insertUser(0, pseudo, nom, prenom, email, telephone, rue, codePostal, ville, confirmationMotDePasse, 0, false);
 			
 			request.setAttribute("user", user);
 			
-			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/connexion/AcceuilConnecte.jsp");
+			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/pageAccueil.jsp");
 			rd.forward(request, response);
 			
 		}catch (Exception e) {
 			
 			//request.setAttribute("Erreur", e.getMessage());
-			request.getRequestDispatcher("/WEB-INF/connexion/CreationCompte.jsp");
+			request.getRequestDispatcher("/WEB-INF/jsp/creationCompteUtilisateur.jsp");
 			
 		} 
 
