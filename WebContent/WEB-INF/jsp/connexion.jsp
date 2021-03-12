@@ -17,8 +17,8 @@
 	<form action="<%=request.getContextPath()%>/ServletConnexion" method="post" action="j_security_check"> <!-- Mettre dans action le chemin de la page vers laquelle les infos seront envoyées -->
 		<ul>
 			<li>
-				<label class="txtLabel" for="EmailouPseudo">Identifiant :</label>
-				<input class="champs" type="text" id="EmailouPseudo" name="EmailouPseudo"/> <!-- L'identifiant peut être le mail ou le pseudo -->
+				<label class="txtLabel" for="emailouPseudo">Identifiant :</label>
+				<input class="champs" type="text" id="emailouPseudo" name="emailouPseudo"/> <!-- L'identifiant peut être le mail ou le pseudo -->
 			</li>
 			<li>
 				<label class="txtLabel" for="motDePasse">Mot de passe :</label>
