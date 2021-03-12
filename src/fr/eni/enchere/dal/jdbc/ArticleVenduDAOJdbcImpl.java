@@ -64,8 +64,10 @@ private static final String SqlDelete = "DELETE FROM articles_vendus WHERE no_ar
 				ps=cnx.prepareStatement(SqlSoldArtSelectById);
 				ps.setInt(1, noArticle);
 				rs=ps.executeQuery();
+				while (rs.next()) {
 				articleVendu=new ArticleVendu(rs.getInt("noArticle"), rs.getString("nomArticle"), rs.getInt("nocategorie"), rs.getString("description"), rs.getDate("dateDebutEncheres"), rs.getDate("dateFinEncheres"),  rs.getInt("miseAPrix"),  rs.getInt("PrixVente"),  rs.getString("etatVente"));				
-			cnx.close();
+				}
+				cnx.close();
 			} catch (SQLException e) {
 					e.printStackTrace();
 		            DALException dalException = new DALException();

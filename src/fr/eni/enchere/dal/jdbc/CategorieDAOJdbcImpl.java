@@ -27,7 +27,7 @@ private static final String SqlCatCheckIfUnique = "SELECT * FROM categories WHER
             ps.setString(1, categorie.getLibelle());
             ps.executeUpdate();
             ResultSet rs = ps.getGeneratedKeys();
-            if (rs.next()) {
+            while (rs.next()) {
                 categorie.setNoCategorie(rs.getInt(1));
             }
             cnx.close();
@@ -48,11 +48,10 @@ private static final String SqlCatCheckIfUnique = "SELECT * FROM categories WHER
             ps.setInt(1, id);
             ps.execute();
             ResultSet rs = ps.getResultSet();
-            if (rs.next()) {
+            while (rs.next()) {
                 categorie = new Categorie(
                         rs.getInt("no_categorie"),
-                        rs.getString("libelle")
-                );
+                        rs.getString("libelle"));
             }
             cnx.close();
         } catch (SQLException e) {

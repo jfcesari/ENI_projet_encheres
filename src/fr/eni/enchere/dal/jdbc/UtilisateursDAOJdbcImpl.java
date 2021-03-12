@@ -83,8 +83,9 @@ private static final String sqlUniqueEmail = "SELECT * FROM utilisateurs WHERE e
 		ps=cnx.prepareStatement(sqlUserSelectbyPseudo);
 		ps.setString(1, pseudo_utilisateur);
 		rs=ps.executeQuery();
-		
+	while (rs.next()) {		
 	utilisateur=new Utilisateur(rs.getInt("no_utilisateur"), rs.getString("pseudo"), rs.getString("nom"), rs.getString("prenom"), rs.getString("email"), rs.getString("telephone"),  rs.getString("rue"),  rs.getString("code_postal"),  rs.getString("ville"), rs.getString("mot_de_passe"), rs.getInt("credit"), rs.getBoolean("administrateur"));
+	}
 	cnx.close();
 	} catch (SQLException e) {
 			e.printStackTrace();
@@ -93,7 +94,7 @@ private static final String sqlUniqueEmail = "SELECT * FROM utilisateurs WHERE e
             throw dalException;
             }
 	return utilisateur;
-}
+	}
 
 	public ArrayList<String> selectAllEmail() throws DALException {
 		Connection cnx=JdbcTools.connect();

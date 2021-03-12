@@ -44,7 +44,7 @@ private static final String SqlWdwlDelete = "DELETE FROM retraits WHERE no_artic
             stmt.setInt(1, noArticle);
             stmt.execute();
             ResultSet rs = stmt.getResultSet();
-            if (rs.next()) {
+            while (rs.next()) {
                retrait=new Retrait(rs.getString("rue"), rs.getString("code_postal"), rs.getString("ville"));
             }
         } catch (SQLException e) {
