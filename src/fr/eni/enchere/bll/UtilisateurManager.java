@@ -11,7 +11,6 @@ import fr.eni.enchere.bll.BLLException;
 
 public class UtilisateurManager {
 	
-	private static UtilisateurManager instance;
 	private static UtilisateurDAO daoUsr;
 
    public UtilisateurManager() throws BLLException {
@@ -60,20 +59,37 @@ public class UtilisateurManager {
     }
 
     //CRUD: insert
-    public void insertUtilisateur(Utilisateur utilisateur) throws BLLException, DALException {
-        BLLException bllException = validateUtilisateur(utilisateur);
-        if (!daoUsr.checkForUniquePseudo(utilisateur.getPseudo())) {
-            bllException.addError(BLLErrors.pseudo_taken);
-        }
-        if (!daoUsr.checkForUniqueEmail(utilisateur.getEmail())) {
-            bllException.addError(BLLErrors.email_taken);
-        }
-        if (bllException.hasErrors()) {
-            throw bllException;
-        } else {
-            daoUsr.insert(utilisateur);
-        }
-    }
+    public Utilisateur insertUtilisateur(int noUtilisateur, String pseudo, String nom, String prenom, String email, String telephone, String rue, String codePostal, String ville, String motDePasse, int credit, boolean administrateur) {
+		
+		Utilisateur utilisateur = new Utilisateur();
+	
+		utilisateur.setPseudo(pseudo);
+		utilisateur.setNom(nom);
+		utilisateur.setPrenom(prenom);
+		utilisateur.setEmail(email);
+		utilisateur.setTelephone(telephone);
+		utilisateur.setRue(rue);
+		utilisateur.setCodePostal(codePostal);
+		utilisateur.setVille(ville);
+		utilisateur.setMotDePasse(motDePasse);
+		utilisateur.setCredit(0);
+		utilisateur.setAdministrateur(false);
+		if(verifMail(email) == true && verifPseudo(pseudo) == true) {
+			try {
+				this.daoUsr.insert(utilisateur);
+			} catch (DALException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} 
+			System.out.println("CPALAMERDE");
+			
+		}else {
+			//throw new BusinessException("L'email est déjà utilisé, veuillez en utiliser un autre.");
+			System.out.println("CLAMERDE");
+		}
+		return utilisateur;
+		
+	}
 
 	private boolean verifPseudo(String pseudo2) {
 		ArrayList<String> listPseudo = daoUsr.selectAllPseudo();
