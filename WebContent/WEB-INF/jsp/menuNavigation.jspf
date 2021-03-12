@@ -19,6 +19,7 @@
 	<c:otherwise>
 		<nav>
 			<a class="menu" href="<%=request.getContextPath()%>/ServletConnexion">S'inscrire - Se connecter</a>
+			<a class="menu" href="<%=request.getContextPath()%>/ServletCompteUtilisateur">Mon profil</a>
 		</nav>
 	</c:otherwise>
 	
