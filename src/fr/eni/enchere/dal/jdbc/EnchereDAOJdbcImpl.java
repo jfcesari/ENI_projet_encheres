@@ -18,7 +18,7 @@ import fr.eni.enchere.dal.EnchereDAO;
 public class EnchereDAOJdbcImpl implements EnchereDAO {
 	
 private static final String SqlAuctInsert = "INSERT INTO encheres (no_utilisateur, no_article, date_enchere, montant_enchere) VALUES (?, ?, ?, ?)";
-private static final String SqlSelectByUserAndState = "SELECT E.no_article FROM encheres E INNER JOIN ARTICLES_VENDUS AV on E.no_article = AV.no_article WHERE AV.etat_vente = ? AND E.no_utilisateur = ?";
+private static final String SqlSelectAuctByUserAndState = "SELECT E.no_article FROM encheres E INNER JOIN ARTICLES_VENDUS AV on E.no_article = AV.no_article WHERE AV.etat_vente = ? AND E.no_utilisateur = ?";
 
 		@Override
 	    public void insert(Enchere enchere) throws DALException {
@@ -44,7 +44,7 @@ private static final String SqlSelectByUserAndState = "SELECT E.no_article FROM 
 	        Connection cnx = JdbcTools.connect();
 	        List <Integer> noArticlesMatched = new ArrayList<>();
 	        try {
-	            PreparedStatement stmt = cnx.prepareStatement(SqlSelectByUserAndState);
+	            PreparedStatement stmt = cnx.prepareStatement(SqlSelectAuctByUserAndState);
 	            stmt.setString(1, state);
 	            stmt.setInt(2, utilisateur.getNoUtilisateur());
 	            stmt.execute();

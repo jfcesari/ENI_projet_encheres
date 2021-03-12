@@ -98,17 +98,6 @@ public class ArticleVenduManager {
         }
     }
 
-    public List<Integer> getArticlesFilteredBySellerAndState(Utilisateur utilisateur, String state) throws DALException, BLLException {
-        List<Integer> articleVendus = daoAV.getArticlesFromASellerAndState(utilisateur, state);
-        if (articleVendus.isEmpty()) {
-            BLLException bllException = new BLLException();
-            bllException.addError(BLLErrors.no_result);
-            throw bllException;
-        } else {
-            return articleVendus;
-        }
-    }
-
     private BLLException validateArticleVendu(ArticleVendu articleVendu) {
         BLLException bllException = new BLLException();
         if (articleVendu.getNomArticle().length() > 30) {

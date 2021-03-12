@@ -12,7 +12,6 @@ import fr.eni.enchere.bll.BLLException;
 public class UtilisateurManager {
 	
 	private static UtilisateurManager instance;
-	
 	private static UtilisateurDAO daoUsr;
 
    public UtilisateurManager() throws BLLException {
@@ -30,23 +29,13 @@ public class UtilisateurManager {
 	}
     
 	public Utilisateur getUtilisateurLogin(String EmailouPseudo, String motDePasse) {
-		
 		Utilisateur utilisateur = null;
-		
-		
 		try {
-			
 		    utilisateur = daoUsr.selectLogin(EmailouPseudo, motDePasse);
-			
 		} catch (Exception e) {
-			
 			e.printStackTrace();
-			
 		}
-		
-		
-		return utilisateur;
-			
+		return utilisateur;	
 	}
 	
     //CRUD: update
@@ -87,7 +76,6 @@ public class UtilisateurManager {
     }
 
     public Utilisateur insertUser(int noUtilisateur, String pseudo, String nom, String prenom, String email, String telephone, String rue, String codePostal, String ville, String motDePasse, int credit, boolean administrateur) {
-		
 		Utilisateur utilisateur = new Utilisateur();
 	
 		utilisateur.setPseudo(pseudo);
@@ -114,11 +102,8 @@ public class UtilisateurManager {
     
 	private boolean verifPseudo(String pseudo2) {
 		ArrayList<String> listPseudo = daoUsr.selectAllPseudo();
-		
 		for (String pseudo : listPseudo) {
-			
-			if(pseudo2.equals(pseudo)) return false;
-				
+			if(pseudo2.equals(pseudo)) return false;	
 		}
 		return true;
 		
@@ -166,16 +151,10 @@ public class UtilisateurManager {
     }
 
     	public Boolean verifMail (String mail) {
-		
 		ArrayList<String> listMail = daoUsr.selectAllEmail();
-		
 		for (String email : listMail) {
-			
-			if(mail.equals(email)) return false;
-				
+			if(mail.equals(email)) return false;	
 		}
-		
 		return true;
-		
 	}
 }

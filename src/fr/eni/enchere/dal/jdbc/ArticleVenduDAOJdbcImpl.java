@@ -21,7 +21,6 @@ private static final String SqlSoldArtSelectById = "SELECT * FROM articles_vendu
 private static final String SqlSelectAll = "SELECT * FROM articles_vendus";
 private static final String SqlSoldArtSelectByCategory = "SELECT * FROM articles_vendus INNER JOIN categories c on articles_vendus.no_categorie = C.no_categorie WHERE C.no_categorie = ?";
 private static final String SqlSelectByEtat = "SELECT no_article FROM articles_vendus WHERE etat_vente = ?";
-private static final String SqlSelectBySellerAndState = "SELECT AV.no_article FROM utilisateurs U INNER JOIN articles_vendus AV on U.no_utilisateur = AV.no_utilisateur WHERE U.no_utilisateur = ? AND AV.etat_vente = ?";
 private static final String SqlSelectByName = "SELECT * FROM articles_vendus WHERE nom_article LIKE ?";
 private static final String SqlUpdateById = "UPDATE articles_vendus SET nom_article = ?, description = ?, date_debut_encheres = ?, date_fin_encheres = ?, prix_initial = ?, prix_vente = ?, etat_vente = ?, no_utilisateur = ?, no_categorie = ? WHERE no_article= ?;";
 private static final String SqlUpdateCurrentPrice = "UPDATE artiles_vendus SET prix_vente = ? WHERE no_article = ?";
@@ -104,7 +103,7 @@ private static final String SqlDelete = "DELETE FROM articles_vendus WHERE no_ar
 			ResultSet rs=null;
 			List<ArticleVendu> articlesVendus = new ArrayList<>();
 			try {
-				ps=cnx.prepareStatement(SqlSoldArtSelectById);
+				ps=cnx.prepareStatement(SqlSoldArtSelectByCategory);
 				ps.setInt(1, Categorie.getNoCategorie());
 				rs=ps.executeQuery();
 				cnx.close();
@@ -140,29 +139,6 @@ private static final String SqlDelete = "DELETE FROM articles_vendus WHERE no_ar
 	            throw dalException;
 	        }
 	        return articlesVendus;
-	    }
-
-		@Override
-	    public List<Integer> getArticlesFromASellerAndState(Utilisateur utilisateur, String etatVente) throws DALException {
-			 Connection cnx = JdbcTools.connect();
-		     List <Integer> articleVendus = new ArrayList<>();
-		     try {
-		            PreparedStatement ps = cnx.prepareStatement(SqlSelectBySellerAndState);
-		            ps.setInt(1, utilisateur.getNoUtilisateur());
-		            ps.setString(2, etatVente);
-		            ps.execute();
-		            ResultSet rs = ps.getResultSet();
-		            while (rs.next()) {
-		                articleVendus.add(rs.getInt("no_article"));
-		            }
-		            cnx.close();
-		        } catch (SQLException e) {
-		            e.printStackTrace();
-		            DALException dalException = new DALException();
-		            dalException.addError(DALErrors.error_select);
-		            throw dalException;
-		        }
-		        return articleVendus;
 	    }
 
 		@Override

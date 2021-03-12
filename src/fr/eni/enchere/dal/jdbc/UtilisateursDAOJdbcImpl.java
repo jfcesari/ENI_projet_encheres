@@ -16,10 +16,10 @@ import fr.eni.enchere.dal.UtilisateurDAO;
 public class UtilisateursDAOJdbcImpl implements UtilisateurDAO {
 
 private static final String sqlUserSelectbyId = "SELECT * FROM utilisateurs WHERE no_utilisateur=?";
+private static final String sqlUserSelectbyPseudo = "SELECT * FROM utilisateurs WHERE pseudo=?";
 private static final String sqlUserUpdate = "UPDATE utilisateurs SET pseudo=?, nom=?, prenom=?, email=?, telephone=?, rue=?, code_postal=?, ville=?, mot_de_passe=?, credit=?, administrateur=?";
 private static final String sqlUserInsert = "INSERT into utilisateurs (pseudo,nom,prenom,email,telephone,rue,code_postal,ville,mot_de_passe,credit,administrateur) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
 private static final String sqlUserDelete = "no_utilisateur=?";
-private static final String sqlUserSelectbyPseudo = "SELECT * FROM utilisateurs WHERE pseudo=?";
 private static final String sqlUniquePseudo = "SELECT * FROM utilisateurs WHERE pseudo LIKE ?";
 private static final String sqlUniqueEmail = "SELECT * FROM utilisateurs WHERE email LIKE ?;";
 private static final String SqlSelectEmail = "SELECT email FROM utilisateurs";
@@ -215,16 +215,12 @@ private static final String SqlSelectPseudo = "SELECT pseudo FROM utilisateurs";
 	}
 
 	public Utilisateur selectLogin(String EmailouPseudo, String motDePasse) {
-
 	Utilisateur utilisateur = null;
-
 	ResultSet rs = null;
 	PreparedStatement pstmt = null;
 	Connection cnx = null;
-
 	try {
 		cnx = ConnectionProvider.getConnection();
-
 		pstmt = cnx.prepareStatement(SqlSelectLogin);
 		pstmt.setString(1, EmailouPseudo);
 		pstmt.setString(2, EmailouPseudo);
