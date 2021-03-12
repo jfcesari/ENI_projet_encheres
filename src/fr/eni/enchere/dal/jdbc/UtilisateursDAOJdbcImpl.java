@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import fr.eni.enchere.bo.Utilisateur;
 import fr.eni.enchere.dal.ConnectionProvider;
 import fr.eni.enchere.dal.DALErrors;
-//import fr.eni.enchere.dal.jdbc.UtilisateurDAO;
 import fr.eni.enchere.dal.UtilisateurDAO;
 
 public class UtilisateursDAOJdbcImpl implements UtilisateurDAO {
@@ -239,35 +238,6 @@ private static final String SqlSelectPseudo = "SELECT pseudo FROM utilisateurs";
         return isUnique;
 	}
 
-	private Utilisateur utilisateurBuilder(ResultSet rs) {
-
-		Utilisateur utilisateur = new Utilisateur();
-
-		try {
-
-			utilisateur.setNoUtilisateur(rs.getInt("no_utilisateur"));
-			utilisateur.setPseudo(rs.getString("pseudo"));
-			utilisateur.setNom(rs.getString("nom"));
-			utilisateur.setPrenom(rs.getString("prenom"));
-			utilisateur.setEmail(rs.getString("email"));
-			utilisateur.setTelephone(rs.getString("telephone"));
-			utilisateur.setRue(rs.getString("rue"));
-			utilisateur.setCodePostal(rs.getString("code_postal"));
-			utilisateur.setVille(rs.getString("ville"));
-			utilisateur.setMotDePasse(rs.getString("mot_de_passe"));
-			utilisateur.setCredit(rs.getInt("credit"));
-			utilisateur.setAdministrateur(rs.getBoolean("administrateur"));
-
-		} catch (Exception e) {
-
-			e.printStackTrace();
-
-		}
-
-		return utilisateur;
-
-	}
-	
 	public ArrayList<String> selectAllEmail() {
 
 		ResultSet rs = null;
@@ -369,62 +339,62 @@ private static final String SqlSelectPseudo = "SELECT pseudo FROM utilisateurs";
 
 	}
 	
-	@Override
-	public void insertUser(Utilisateur utilisateurs) {
-
-		ResultSet rs = null;
-		PreparedStatement pstmt = null;
-		Connection cnx = null;
-
-		try {
-
-			cnx = ConnectionProvider.getConnection();
-			pstmt = cnx.prepareStatement(sqlUserInsert, PreparedStatement.RETURN_GENERATED_KEYS);
-			pstmt.setString(1, utilisateurs.getPseudo());
-			pstmt.setString(2, utilisateurs.getNom());
-			pstmt.setString(3, utilisateurs.getPrenom());
-			pstmt.setString(4, utilisateurs.getEmail());
-			pstmt.setString(5, utilisateurs.getTelephone());
-			pstmt.setString(6, utilisateurs.getRue());
-			pstmt.setString(7, utilisateurs.getCodePostal());
-			pstmt.setString(8, utilisateurs.getVille());
-			pstmt.setString(9, utilisateurs.getMotDePasse());
-			pstmt.setInt(10, 0);
-			pstmt.setBoolean(11, false);
-
-			pstmt.executeUpdate();
-
-			rs = pstmt.getGeneratedKeys();
-
-			if (rs.next()) {
-				utilisateurs.setNoUtilisateur(rs.getInt(1));
-			}
-
-		} catch (SQLException e) {
-
-			e.printStackTrace();
-
-		} finally {
-
-			try {
-
-				if (rs != null) {
-					rs.close();
-				}
-
-				if (pstmt != null) {
-					pstmt.close();
-				}
-
-				if (cnx != null) {
-					cnx.close();
-				}
-
-			} catch (SQLException e) {
-
-				e.printStackTrace();
-
-			}
-		}
-	}
+//	@Override
+//	public void insertUser(Utilisateur utilisateurs) {
+//
+//		ResultSet rs = null;
+//		PreparedStatement pstmt = null;
+//		Connection cnx = null;
+//
+//		try {
+//
+//			cnx = ConnectionProvider.getConnection();
+//			pstmt = cnx.prepareStatement(sqlUserInsert, PreparedStatement.RETURN_GENERATED_KEYS);
+//			pstmt.setString(1, utilisateurs.getPseudo());
+//			pstmt.setString(2, utilisateurs.getNom());
+//			pstmt.setString(3, utilisateurs.getPrenom());
+//			pstmt.setString(4, utilisateurs.getEmail());
+//			pstmt.setString(5, utilisateurs.getTelephone());
+//			pstmt.setString(6, utilisateurs.getRue());
+//			pstmt.setString(7, utilisateurs.getCodePostal());
+//			pstmt.setString(8, utilisateurs.getVille());
+//			pstmt.setString(9, utilisateurs.getMotDePasse());
+//			pstmt.setInt(10, 0);
+//			pstmt.setBoolean(11, false);
+//
+//			pstmt.executeUpdate();
+//
+//			rs = pstmt.getGeneratedKeys();
+//
+//			if (rs.next()) {
+//				utilisateurs.setNoUtilisateur(rs.getInt(1));
+//			}
+//
+//		} catch (SQLException e) {
+//
+//			e.printStackTrace();
+//
+//		} finally {
+//
+//			try {
+//
+//				if (rs != null) {
+//					rs.close();
+//				}
+//
+//				if (pstmt != null) {
+//					pstmt.close();
+//				}
+//
+//				if (cnx != null) {
+//					cnx.close();
+//				}
+//
+//			} catch (SQLException e) {
+//
+//				e.printStackTrace();
+//
+//			}
+//		}
+//	}
 }
