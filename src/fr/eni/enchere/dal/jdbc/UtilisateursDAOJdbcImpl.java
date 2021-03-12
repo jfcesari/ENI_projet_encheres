@@ -97,7 +97,6 @@ private static final String sqlUniqueEmail = "SELECT * FROM utilisateurs WHERE e
 
 	public ArrayList<String> selectAllEmail() throws DALException {
 		Connection cnx=JdbcTools.connect();
-		Statement stmt = null;
 		ArrayList<String> listMail = new ArrayList<String>();
 		try {
 			PreparedStatement ps = cnx.prepareStatement(SqlSelectEmail);
@@ -116,9 +115,8 @@ private static final String sqlUniqueEmail = "SELECT * FROM utilisateurs WHERE e
 		return listMail;
 	}
 	
-	public ArrayList<String> selectAllPseudo() {
+	public ArrayList<String> selectAllPseudo() throws DALException {
 		Connection cnx=JdbcTools.connect();
-		Statement stmt = null;
 		ArrayList<String> listPseudo = new ArrayList<String>();
 		try {
 			PreparedStatement ps = cnx.prepareStatement(SqlSelectPseudo);
