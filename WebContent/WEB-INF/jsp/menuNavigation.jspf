@@ -11,7 +11,7 @@
 		<nav>
 			<a class="menu" href="">Enchères</a>
 			<a class="menu" href="">Vendre un article</a>
-			<a class="menu" href="">Mon profil</a>
+			<a class="menu" href="<%=request.getContextPath()%>/ServletCompteUtilisateur">Mon profil</a>
 			<a class="menu" href="">Déconnexion</a>
 		</nav>
 	</c:when>
