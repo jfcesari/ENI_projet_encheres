@@ -75,31 +75,6 @@ public class UtilisateurManager {
         }
     }
 
-    public Utilisateur insertUser(int noUtilisateur, String pseudo, String nom, String prenom, String email, String telephone, String rue, String codePostal, String ville, String motDePasse, int credit, boolean administrateur) {
-		Utilisateur utilisateur = new Utilisateur();
-	
-		utilisateur.setPseudo(pseudo);
-		utilisateur.setNom(nom);
-		utilisateur.setPrenom(prenom);
-		utilisateur.setEmail(email);
-		utilisateur.setTelephone(telephone);
-		utilisateur.setRue(rue);
-		utilisateur.setCodePostal(codePostal);
-		utilisateur.setVille(ville);
-		utilisateur.setMotDePasse(motDePasse);
-		utilisateur.setCredit(0);
-		utilisateur.setAdministrateur(false);
-		if(verifMail(email) == true && verifPseudo(pseudo) == true) {
-			this.daoUsr.insertUser(utilisateur); 
-			System.out.println("CPALAMERDE");
-			
-		}else {
-			System.out.println("CLAMERDE");
-		}
-		return utilisateur;
-		
-	}
-    
 	private boolean verifPseudo(String pseudo2) {
 		ArrayList<String> listPseudo = daoUsr.selectAllPseudo();
 		for (String pseudo : listPseudo) {

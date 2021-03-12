@@ -72,7 +72,7 @@ public class ServletCreationUtilisateur extends HttpServlet {
 		
 		try {
 			
-			newUser.insertUser(0, pseudo, nom, prenom, email, telephone, rue, codePostal, ville, confirmationMotDePasse, 0, false);
+			newUser.insertUtilisateur(user);
 			
 			request.setAttribute("user", user);
 			
