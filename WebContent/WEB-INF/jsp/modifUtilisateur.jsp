@@ -49,8 +49,8 @@
 				<input class="champs" type="text" id="newVille" name="newVille" value="${utilisateur.ville}" onFocus="this.value='';""/>
 			</li>
 			<li>
-				<label class="txtLabel" for="motDePasse">Mot de passe actuel :</label>
-				<input class="champs" type="password" id="motDePasse" name="motDePasse"/>
+				<label class="txtLabel" for="motDePasseActuel">Mot de passe actuel :</label>
+				<input class="champs" type="password" id="motDePasseActuel" name="motDePasseActuel"/>
 			</li>
 			<li>
 				<label class="txtLabel" for="newMotDePasse">Nouveau mot de passe :</label>
